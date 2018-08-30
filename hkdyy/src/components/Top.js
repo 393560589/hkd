@@ -7,7 +7,7 @@ class Top extends Component{
 				<h1 className="left">源货后台业务管理系统</h1>
 				<ul className="tnav">
 					<li>
-						<img alt="" src="images/u152.png" /><span>admin</span>
+						<img alt="" src="../assets/u152.png" /><span>admin</span>
 						<div className="ntip  tn1">
 							<div className="tn-title">
 								<span className="left">账户信息</span>
@@ -21,9 +21,9 @@ class Top extends Component{
 							</div>
 						</div>
 					</li>
-					<li><i></i><a href=""><img alt="" src="images/u153.png" /></a></li>
+					<li><i></i><a href=""><img alt="" src="../assets/u153.png" /></a></li>
 					<li>
-						<i></i><img alt="" src="images/u155.png" />
+						<i></i><img alt="" src="../assets/u155.png" />
 						<div className="ntip tn2">
 							<div className="tn-title">
 								<span className="left">常用菜单</span>
@@ -43,7 +43,7 @@ class Top extends Component{
 						</div>
 					</li>
 					<li>
-						<i></i><img alt="" src="images/u158.png" /><font>10</font>
+						<i></i><img alt="" src="../assets/u158.png" /><font>10</font>
 						<div className="ntip tn3">
 							<div className="tn-title">
 								<span className="left">广告位提示</span>
@@ -56,7 +56,7 @@ class Top extends Component{
 						</div>
 					</li>
 					<li>
-						<i></i><img alt="" src="images/u150.png" />
+						<i></i><img alt="" src="../assets/u150.png" />
 						<div className="ntip tn4">
 							<ul className="colors">
 								<li className="green" color="#1abc9c" border-c="#279c85"><span>点击换肤</span></li>
@@ -70,7 +70,7 @@ class Top extends Component{
 							</ul>
 						</div>
 					</li>
-					<li><i></i><img alt="" src="images/u162.png" /></li>
+					<li><i></i><img alt="" src="../assets/u162.png" /></li>
 				</ul>
 			</div>
 			);

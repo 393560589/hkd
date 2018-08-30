@@ -5,7 +5,8 @@ import withRouter from 'umi/withRouter'
 //import Flexable from '../utils/flexable'
 import Disscale from '../utils/disscale'
 import './index.less'
-
+import Top from '../components/Top'
+import LeftNav from '../components/Leftnav'
 //Flexable.init();
 Disscale.init();
 
@@ -19,6 +20,7 @@ class App extends PureComponent {
       }
     }
     render(){
+
       return (
         <ReactCSSTransitionGroup
           transitionName="slide-in"
@@ -26,6 +28,8 @@ class App extends PureComponent {
           transitionEnterTimeout={300}
           transitionLeaveTimeout={300}>
             <div key={this.props.location.pathname}>
+              <Top/>
+              <LeftNav {...this.props}/>
               {
                 this.props.children
               }

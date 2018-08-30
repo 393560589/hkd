@@ -1,25 +1,31 @@
-import React,{PureComponent} from 'react'
+import React,{PureComponent,Fragment} from 'react'
 import { Tooltip,Button } from 'antd'
 import { connect } from 'dva'
 import { LeftNav } from '../../components/test'
 @connect(({index})=>({index}))
 
 export default class Test extends PureComponent{
+  state={
+    list:999
+  }
   componentDidMount(){
     console.log(this.props)
   }//js挂载后,基本js交互行为可以写这里
   getProps=()=>{
-    alert(this.props.index.list)
+    this.setState({
+      list:this.state.list-1
+    })
   }
   render(){
+    const {list} = this.state
     return (
-      <div>
+      <Fragment>
         <LeftNav>
-          这是一个测试
+          { list }
         </LeftNav>
         <Button onClick={()=>this.getProps()} type={'primary'}> 按钮</Button>
         <Button onClick={()=>this.getProps()} type={'primary'}> 按钮2</Button>
-      </div>
+      </Fragment>
 
     )
   }
