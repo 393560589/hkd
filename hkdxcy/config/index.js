@@ -1,5 +1,5 @@
 const config = {
-  projectName: 'hkdtaro',
+  projectName: 'hkdxcy',
   date: '2018-8-30',
   designWidth: 750,
   sourceRoot: 'src',
