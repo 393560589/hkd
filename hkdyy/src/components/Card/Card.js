@@ -1,5 +1,5 @@
 import styles from './index.less'
-import {Button} from 'antd'
+import {Button,Icon} from 'antd'
 import React,{PureComponent} from 'react'
 
 export class Card extends PureComponent{
@@ -12,19 +12,21 @@ export class Card extends PureComponent{
       <div className={styles["con-title"]}>
         <div className={styles["titlesec"]}>
           <span className="left">{this.props.children}</span>
-          <Button loading={loading} className="right refresh"
-                  onClick={()=>{
-                    this.setState({
-                      loading:true
-                    })
-                    setTimeout(()=>{
-                      window.location.reload();
+            <Button icon="sync" loading={loading} className="right refresh"
+                    onClick={()=>{
                       this.setState({
-                        loading:false
+                        loading:true
                       })
-                    },600)}
-                  }>
-            刷新</Button>
+                      setTimeout(()=>{
+                        window.location.reload();
+                        this.setState({
+                          loading:false
+                        })
+                      },600)}
+                    }>
+              刷新</Button>
+
+
         </div>
       </div>
     )

@@ -11,7 +11,7 @@ export default class Accountset extends PureComponent{
       <div className="content">
         <div className="con-title">
           <div className="titlesec">
-            <span className="left">会员列表</span>
+            <span className="left">对账列表</span>
             <a className="right refresh">刷新</a>
           </div>
         </div>
@@ -28,13 +28,25 @@ export default class Accountset extends PureComponent{
               </div>
             </div>
             <div className="scr-con">
-              <span>用户账号：</span>
-              <input type="text" placeholder="用户ID/账号" name=""/>
-                <span>用户昵称：</span>
-                <input type="text" placeholder="用户昵称" name=""/>
-                  <span>注册时间:</span>
-                  <div className="left"><input type="text" placeholder="请选择时间" name="" id="chistime"/><i
-                    className="fa fa-clock-o"/></div>
+              <span>订单编号：</span>
+              <input type="text" placeholder="订单编号" name=""/>
+                <span>金额范围：</span>
+                <select>
+                  <option disabled selected hidden>请选择金额范围</option>
+                  <option>100元以下</option>
+                  <option>100-200元</option>
+                  <option>200-500元</option>
+                  <option>500-1000元</option>
+                  <option>1000元以上</option>
+                </select>
+                <span>对账状态：</span>
+                <select>
+                  <option>全部</option>
+                  <option>未对账</option>
+                  <option>已对账</option>
+                  <option>异常</option>
+                  <option>已冲正</option>
+                </select>
             </div>
           </div>
           <div className="datalist">
@@ -42,25 +54,11 @@ export default class Accountset extends PureComponent{
               <i className="tip1 left fa fa-list-ul"></i>
               <span className="left">数据列表</span>
               <div className="right">
-                <select>
-                  <option value="" disabled selected hidden>群发短信</option>
-                  <option value="">选中用户</option>
-                  <option value="">全部用户</option>
-                </select>
-                <select>
-                  <option value="" disabled selected hidden>群发站内信</option>
-                  <option value="">选中用户</option>
-                  <option value="">全部用户</option>
-                </select>
-                <select>
-                  <option value="" disabled selected hidden>设置标签</option>
-                  <option value="">选中用户</option>
-                  <option value="">全部用户</option>
-                </select>
+                <a>批量对账</a>
                 <select>
                   <option value="" disabled selected hidden>导出数据</option>
-                  <option value="">选中用户</option>
-                  <option value="">全部用户</option>
+                  <option value="">选中数据</option>
+                  <option value="">全部数据</option>
                 </select>
                 <select disabled="disabled">
                   <option value="" disabled selected hidden>显示条数</option>
@@ -77,41 +75,36 @@ export default class Accountset extends PureComponent{
               <tr>
                 <th><input type="checkbox" className="choice" name=""/><i
                   className="choiceshow allchoice fa fa-square-o"></i></th>
-                <th>会员ID</th>
-                <th>会员账号</th>
-                <th>会员名称</th>
-                <th>会员等级</th>
-                <th>消费金额</th>
-                <th>订单数量</th>
-                <th>创建时间</th>
-                <th>账户启用状态</th>
+                <th>订单编号</th>
+                <th>订单金额</th>
+                <th>支付方式</th>
+                <th>支付时间</th>
+                <th>对账人员</th>
+                <th>对账时间</th>
+                <th>状态</th>
                 <th>操作</th>
               </tr>
               <tr>
                 <td><input type="checkbox" className="choice" name=""/><i className="choiceshow fa fa-square-o"></i></td>
-                <td>8848</td>
-                <td>15154554846</td>
-                <td>大风车</td>
-                <td>初级会员</td>
-                <td>¥2000.00</td>
-                <td>100</td>
-                <td>2018.2.23</td>
-                <td><input type="checkbox" className="oclse" name=""/><i className="oclseshow fa fa-toggle-off"/></td>
-                <td className="operat"><a href="../menber/menberman.html">查看</a><a
-                  href="../menber/menberedit.html">编辑</a><a>一键进入</a></td>
+                <td>201707196398345</td>
+                <td>¥200.00</td>
+                <td>支付宝</td>
+                <td>2017-07-19 14:48:38</td>
+                <td>admin</td>
+                <td>2017-07-19 14:48:38</td>
+                <td>已对账</td>
+                <td className="operat"><a href="../finance/checkaccounts.html">查看详情</a></td>
               </tr>
               <tr>
                 <td><input type="checkbox" className="choice" name=""/><i className="choiceshow fa fa-square-o"></i></td>
-                <td>8848</td>
-                <td>15154554846</td>
-                <td>大风车</td>
-                <td>初级会员</td>
-                <td>¥2000.00</td>
-                <td>100</td>
-                <td>2018.2.23</td>
-                <td><input type="checkbox" className="oclse" checked="" name=""/><i
-                  className="oclseshow fa fa-toggle-off"></i></td>
-                <td className="operat"><a>查看</a><a>编辑</a><a>一键进入</a></td>
+                <td>201707196398345</td>
+                <td>¥200.00</td>
+                <td>支付宝</td>
+                <td>2017-07-19 14:48:38</td>
+                <td>admin</td>
+                <td>2017-07-19 14:48:38</td>
+                <td>已对账</td>
+                <td className="operat"><a>查看详情</a></td>
               </tr>
             </table>
             <div className="tip-botbox">
@@ -119,13 +112,7 @@ export default class Accountset extends PureComponent{
                 <input type="checkbox" className="choice" name=""/><i
                   className="choiceshow allchoice fa fa-square-o"></i>
                   <span>全选</span>
-                  <select>
-                    <option value="" disabled selected hidden>批量操作</option>
-                    <option value="">启用</option>
-                    <option value="">停用</option>
-                    <option value="">删除</option>
-                  </select>
-                  <a>确定</a>
+
               </div>
               <div className="right">
                 <span className="left">共<font>10</font>页/<font>100</font>条数据</span>

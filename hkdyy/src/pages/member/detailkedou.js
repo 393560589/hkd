@@ -11,12 +11,30 @@ export default class Accountset extends PureComponent{
       <div className="content">
         <div className="con-title">
           <div className="titlesec">
-            <span className="left">会员列表</span>
+            <span className="left">蝌蚪币币明细</span>
+            <a className="right reback">返回</a>
             <a className="right refresh">刷新</a>
           </div>
         </div>
         <div className="tablebox">
-          <div className="screen">
+          <table width="100%" className="litable bodz">
+            <tr>
+              <th>用户账号</th>
+              <th>用户昵称</th>
+              <th>会员等级</th>
+              <th>可用蝌蚪币</th>
+              <th>成长值</th>
+            </tr>
+            <tr>
+              <td>1800000000</td>
+              <td>Windir</td>
+              <td>黄金会员</td>
+              <td>1000</td>
+              <td>1000</td>
+            </tr>
+          </table>
+
+          <div className="screen" style="margin-top:20px;">
             <div className="tip-title">
               <i className="tip1 left fa fa-search"></i>
               <span className="left">筛选查询</span>
@@ -24,17 +42,18 @@ export default class Accountset extends PureComponent{
                 <i className="tip2 fa fa-angle-up"></i>
                 <span>收起筛选</span>
                 <a>查询结果</a>
-                <a>高级检索</a>
               </div>
             </div>
             <div className="scr-con">
-              <span>用户账号：</span>
-              <input type="text" placeholder="用户ID/账号" name=""/>
-                <span>用户昵称：</span>
-                <input type="text" placeholder="用户昵称" name=""/>
-                  <span>注册时间:</span>
-                  <div className="left"><input type="text" placeholder="请选择时间" name="" id="chistime"/><i
-                    className="fa fa-clock-o"/></div>
+              <span>蝌蚪币来源：</span>
+              <select>
+                <option value="" disabled selected hidden>全部</option>
+                <option value="">普通会员</option>
+                <option value="">黄金会员</option>
+              </select>
+              <span>操作时间：</span>
+              <div className="left"><input type="text" placeholder="请选择时间" name="" id="chistime"/><i
+                className="fa fa-clock-o"></i></div>
             </div>
           </div>
           <div className="datalist">
@@ -42,21 +61,6 @@ export default class Accountset extends PureComponent{
               <i className="tip1 left fa fa-list-ul"></i>
               <span className="left">数据列表</span>
               <div className="right">
-                <select>
-                  <option value="" disabled selected hidden>群发短信</option>
-                  <option value="">选中用户</option>
-                  <option value="">全部用户</option>
-                </select>
-                <select>
-                  <option value="" disabled selected hidden>群发站内信</option>
-                  <option value="">选中用户</option>
-                  <option value="">全部用户</option>
-                </select>
-                <select>
-                  <option value="" disabled selected hidden>设置标签</option>
-                  <option value="">选中用户</option>
-                  <option value="">全部用户</option>
-                </select>
                 <select>
                   <option value="" disabled selected hidden>导出数据</option>
                   <option value="">选中用户</option>
@@ -75,58 +79,25 @@ export default class Accountset extends PureComponent{
             </div>
             <table width="100%" className="litable">
               <tr>
-                <th><input type="checkbox" className="choice" name=""/><i
-                  className="choiceshow allchoice fa fa-square-o"></i></th>
-                <th>会员ID</th>
-                <th>会员账号</th>
-                <th>会员名称</th>
-                <th>会员等级</th>
-                <th>消费金额</th>
-                <th>订单数量</th>
-                <th>创建时间</th>
-                <th>账户启用状态</th>
-                <th>操作</th>
+                <th>优币来源</th>
+                <th>优币变化</th>
+                <th>时间</th>
+                <th>备注</th>
               </tr>
               <tr>
-                <td><input type="checkbox" className="choice" name=""/><i className="choiceshow fa fa-square-o"></i></td>
-                <td>8848</td>
-                <td>15154554846</td>
-                <td>大风车</td>
-                <td>初级会员</td>
-                <td>¥2000.00</td>
-                <td>100</td>
-                <td>2018.2.23</td>
-                <td><input type="checkbox" className="oclse" name=""/><i className="oclseshow fa fa-toggle-off"/></td>
-                <td className="operat"><a href="../menber/menberman.html">查看</a><a
-                  href="../menber/menberedit.html">编辑</a><a>一键进入</a></td>
+                <td>购物奖励</td>
+                <td>+100</td>
+                <td>2017-07-14 18:00:49</td>
+                <td>N/A</td>
               </tr>
               <tr>
-                <td><input type="checkbox" className="choice" name=""/><i className="choiceshow fa fa-square-o"></i></td>
-                <td>8848</td>
-                <td>15154554846</td>
-                <td>大风车</td>
-                <td>初级会员</td>
-                <td>¥2000.00</td>
-                <td>100</td>
-                <td>2018.2.23</td>
-                <td><input type="checkbox" className="oclse" checked="" name=""/><i
-                  className="oclseshow fa fa-toggle-off"></i></td>
-                <td className="operat"><a>查看</a><a>编辑</a><a>一键进入</a></td>
+                <td>管理员修改</td>
+                <td>-100</td>
+                <td>2017-07-14 18:00:49</td>
+                <td>操作人员：admin 操作备注：无</td>
               </tr>
             </table>
             <div className="tip-botbox">
-              <div className="left">
-                <input type="checkbox" className="choice" name=""/><i
-                  className="choiceshow allchoice fa fa-square-o"></i>
-                  <span>全选</span>
-                  <select>
-                    <option value="" disabled selected hidden>批量操作</option>
-                    <option value="">启用</option>
-                    <option value="">停用</option>
-                    <option value="">删除</option>
-                  </select>
-                  <a>确定</a>
-              </div>
               <div className="right">
                 <span className="left">共<font>10</font>页/<font>100</font>条数据</span>
                 <ul className="left flypag">

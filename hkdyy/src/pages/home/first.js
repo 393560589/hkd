@@ -14,28 +14,28 @@ export default class Home extends PureComponent{
         <div className="zlshow">
           <ul>
             <li>
-              <img src="images/u229.png" alt="" className="left" />
+              <img src={require("../../assets/u229.png")} alt="" className="left" />
               <div className="left">
                 <span>今日订单总数</span><br/>
                 <small>200</small>
               </div>
             </li>
             <li>
-              <img src="images/u246.png" alt="" className="left" />
+              <img src={require("../../assets/u246.png")} alt="" className="left" />
               <div className="left">
                 <span>今日订单总数</span><br/>
                 <small>200</small>
               </div>
             </li>
             <li>
-              <img src="images/u268.png" alt="" className="left" />
+              <img src={require("../../assets/u268.png")} alt="" className="left" />
               <div className="left">
                 <span>今日订单总数</span><br/>
                 <small>200</small>
               </div>
             </li>
             <li>
-              <img src="images/u224.png" alt="" className="left" />
+              <img src={require("../../assets/u224.png")} alt="" className="left" />
               <div className="left">
                 <span>今日订单总数</span><br/>
                 <small>200</small>
@@ -49,19 +49,19 @@ export default class Home extends PureComponent{
           </div>
           <ul>
             <li><a>
-              <img src="images/u254.png" alt="" />
+              <img src={require("../../assets/u254.png")} alt="" />
               <span>用户管理</span>
             </a></li>
             <li><a>
-              <img src="images/u258.png" alt="" />
+              <img src={require("../../assets/u258.png")} alt="" />
               <span>交易统计</span>
             </a></li>
             <li><a>
-              <img src="images/u263.png" alt="" />
+              <img src={require("../../assets/u263.png")} alt="" />
               <span>短信营销</span>
             </a></li>
             <li><a>
-              <img src="images/u265.png" alt="" />
+              <img src={require("../../assets/u265.png")} alt="" />
               <span>广告管理</span>
             </a></li>
           </ul>
@@ -109,7 +109,7 @@ export default class Home extends PureComponent{
               <span danumb="2">本月</span>
               <div className="tjdate">
                 <small></small>
-                <img src="images/u278.png" alt="" />
+                <img src={require("../../assets/u278.png")} alt="" />
               </div>
             </div>
           </div>
@@ -134,7 +134,7 @@ export default class Home extends PureComponent{
               <span danumb="2">本月</span>
               <div className="tjdate">
                 <small></small>
-                <img src="images/u278.png" alt="" />
+                <img src={require("../../assets/u278.png")} alt="" />
               </div>
             </div>
           </div>
