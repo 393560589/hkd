@@ -3,51 +3,61 @@ export const menu = [
     key:'首页',
     path:'list-home',
     icon:require('../assets/u135.png'),
+    status:'home',
   },
   {
     key:'商家',
     path:'list-seller',
     icon:require('../assets/u127.png'),
+    status:'business',
   },
   {
     key:'会员',
     path:'list-member',
     icon:require('../assets/u127.png'),
+    status:'member',
   },
   {
     key:'促销',
     path:'list-sales',
+    status:'promotion',
     icon:require('../assets/u123.png'),
   },
   {
     key:'运营',
     path:'list-operate',
     icon:require('../assets/u125.png'),
+    status:'operate'
   },
   {
     key:'商品',
     path:'list-goods',
     icon:require('../assets/u124.png'),
+    status:'commodity'
   },
   {
     key:'统计',
     path:'list-count',
     icon:require('../assets/u137.png'),
+    status:'statistics'
   },
   {
     key:'财务',
     path:'list-financ',
     icon:require('../assets/u130.png'),
+    status:'finance'
   },
   {
     key:'设置',
     path:'list-set',
     icon:require('../assets/u133.png'),
+    status:'setup'
   },
   {
     key:'权限',
     path:'list-power',
     icon:require('../assets/u134.png'),
+    status:'power'
   },
 ];
 export const MenuChilren = [
@@ -58,15 +68,18 @@ export const MenuChilren = [
       children:[
         {
           key:'系统首页',
-          path:'list-power',
+          path:'first',
+          route:'/home/first'
         },
         {
           key:'账户设置',
-          path:'list-power',
+          path:'accountset',
+          route:'/home/accountset'
         },
         {
           key:'登录日志',
-          path:'list-power',
+          path:'loginlog',
+          route:'/home/loginlog'
         }
       ]
     }
@@ -78,7 +91,7 @@ export const MenuChilren = [
       children:[
         {
           key:'商家列表',
-          path:'list-power',
+          path:'businesslist',
           route:'/business/businesslist'
         },
       ]
@@ -91,19 +104,23 @@ export const MenuChilren = [
       children:[
         {
           key:'会员列表',
-          path:'list-power',
+          path:'memberlist',
+          route:'/member/memberlist'
         },
         {
           key:'购买力筛选',
-          path:'list-power',
+          path:'buypower',
+          route:'/member/buypower'
         },
         {
           key:'标签管理',
-          path:'list-power',
+          path:'labelgl',
+          route:'/member/labelgl'
         },
         {
           key:'会员登记设置',
-          path:'list-power',
+          path:'grade',
+          route:'/member/grade'
         },
       ]
     },
@@ -113,15 +130,18 @@ export const MenuChilren = [
       children:[
         {
           key:'成长值及蝌蚪币查询',
-          path:'list-power',
+          path:'growth',
+          route:'/member/growth'
         },
         {
           key:'任务奖励设置',
-          path:'list-power',
+          path:'awardset',
+          route:'/member/awardset'
         },
         {
           key:'更多规则设置',
-          path:'list-power',
+          path:'rulerset',
+          route:'/member/rulerset'
         },
       ]
     }
@@ -133,15 +153,18 @@ export const MenuChilren = [
       children:[
         {
           key:'秒杀活动列表',
-          path:'list-power',
+          path:'seckillactivity',
+          route:'/promotion/seckillactivity'
         },
         {
           key:'时间段列表',
-          path:'list-power',
+          path:'timeslot',
+          route:'/promotion/timeslot'
         },
         {
           key:'秒杀提醒通知',
-          path:'list-power',
+          path:'secremind',
+          route:"/promotion/secremind"
         },
       ]
     },
@@ -151,11 +174,13 @@ export const MenuChilren = [
       children:[
         {
           key:'优惠券列表',
-          path:'list-power',
+          path:'coupons',
+          route:'/promotion/coupons'
         },
         {
           key:'添加优惠券',
-          path:'list-power',
+          path:'addcoupon',
+          route:'/promotion/addcoupon'
         },
       ]
     },
@@ -165,11 +190,13 @@ export const MenuChilren = [
       children:[
         {
           key:'活动列表',
-          path:'list-power',
+          path:'activitylist',
+          route:'/promotion/activitylist'
         },
         {
           key:'添加活动',
-          path:'list-power',
+          path:'activityadd',
+          route:'/promotion/activityadd'
         },
       ]
     },
@@ -179,20 +206,23 @@ export const MenuChilren = [
       children:[
         {
           key:'品牌制造商',
-          path:'list-power',
+          path:'brand',
+          route:'/promotion/brand'
         },
         {
           key:'新鲜好物',
-          path:'list-power',
+          path:'fresh',
+          route:'/promotion/fresh'
         },
         {
           key:'人气推荐',
-          path:'list-power',
+          path:'popularity',
+          route:'/promotion/popularity'
         },
-        {
+        /*{
           key:'专题精选',
           path:'list-power',
-        },
+        },*/
       ]
     }
   ],
@@ -203,7 +233,8 @@ export const MenuChilren = [
       children:[
         {
           key:'直播列表',
-          path:'list-power',
+          path:'livelist',
+          route:'/operate/livelist'
         },
       ]
     },
@@ -213,18 +244,22 @@ export const MenuChilren = [
       children:[
         {
           key:'系统消息',
-          path:'list-power',
+          path:'systemmsg',
+          route:'/operate/systemmsg'
         },
         {
           key:'短信消息',
-          path:'list-power',
+          path:'shortmsg',
+          route:'/operate/shortmsg'
         },
         {
           key:'站内信消息',
-          path:'list-power',
+          path:'mailmsg',
+          route:'/operate/mailmsg'
         },{
           key:'app推送消息',
-          path:'list-power',
+          path:'appmsg',
+          route:'/operate/appmsg'
         },
 
       ]
@@ -235,16 +270,18 @@ export const MenuChilren = [
       children:[
         {
           key:'优惠券查询',
-          path:'list-power',
+          path:'couponquery',
+          route:'/operate/couponquery'
         },
         {
           key:'邀请好友查询',
-          path:'list-power',
+          path:'invitaquery',
+          route:'/operate/invitaquery'
         },
-        {
+        /*{
           key:'幸运抽奖查询',
           path:'list-power',
-        }
+        }*/
       ]
     },
     {
@@ -253,11 +290,13 @@ export const MenuChilren = [
       children:[
         {
           key:'广告列表',
-          path:'list-power',
+          path:'advertlist',
+          route:'/operate/advertlist'
         },
         {
           key:'添加广告',
-          path:'list-power',
+          path:'advertadd',
+          route:'/operate/advertadd'
         }
       ]
     }
@@ -269,7 +308,8 @@ export const MenuChilren = [
       children:[
         {
           key:'商品分类',
-          path:'list-power',
+          path:'classif',
+          route:'/commodity/classif'
         },
       ]
     }
@@ -281,23 +321,28 @@ export const MenuChilren = [
       children:[
         {
           key:'交易统计',
-          path:'list-power',
+          path:'transtatis',
+          route:'/statistics/transtatis'
         },
         {
           key:'流量统计',
-          path:'list-power',
+          path:'flowstatis',
+          route:'/statistics/flowstatis'
         },
-        {
+       /* {
           key:'商品统计',
-          path:'list-power',
-        },
+          path:'menberstatis',
+          route:'/statistics/menberstatis'
+        },*/
         {
           key:'会员统计',
-          path:'list-power',
+          path:'menberstatis',
+          route:'/statistics/menberstatis'
         },
         {
           key:'搜索统计',
-          path:'list-power',
+          path:'searchstatis',
+          route:'/statistics/searchstatis'
         },
       ]
     }
@@ -309,15 +354,18 @@ export const MenuChilren = [
       children:[
         {
           key:'综合统计',
-          path:'list-power',
+          path:'comprestatis',
+          route:'/finance/comprestatis'
         },
         {
           key:'会员排行',
-          path:'list-power',
+          path:'memeranks',
+          route:'/finance/memeranks'
         },
         {
           key:'销售统计',
-          path:'list-power',
+          path:'salestatis',
+          route:'/finance/salestatis'
         }
       ]
     },
@@ -327,7 +375,8 @@ export const MenuChilren = [
       children:[
         {
           key:'对账列表',
-          path:'list-power',
+          path:'reconciliations',
+          route:'/finance/reconciliations'
         }
       ]
     }
@@ -339,19 +388,23 @@ export const MenuChilren = [
       children:[
         {
           key:'平台信息',
-          path:'list-power',
+          path:'paltifor',
+          route:'/setup/paltifor'
         },
         {
           key:'基本设置',
-          path:'list-power',
+          path:'basic',
+          route:'/setup/basic'
         },
         {
           key:'消息提醒',
-          path:'list-power',
+          path:'msgremind',
+          route:'/setup/msgremind'
         },
         {
           key:'验证码设置',
-          path:'list-power',
+          path:'vcode',
+          route:'/setup/vcode'
         }
       ]
     },
@@ -361,20 +414,23 @@ export const MenuChilren = [
       children:[
         {
           key:'运费模板',
-          path:'list-power',
+          path:'freightfrom',
+          route:'/setup/freightfrom'
         },
         {
           key:'物流公司',
-          path:'list-power',
+          path:'logistics',
+          route:'/setup/logistics'
         },
         {
           key:'支付设置',
-          path:'list-power',
+          path:'payset',
+          route:'/setup/payset'
         },
-        {
+        /*{
           key:'区域管理',
           path:'list-power',
-        }
+        }*/
       ]
     }
   ],
@@ -385,24 +441,28 @@ export const MenuChilren = [
       children:[
         {
           key:'部门管理',
-          path:'list-power',
+          path:'department',
+          route:'/power/department'
         },
         {
           key:'成员管理',
-          path:'list-power',
+          route:'/power/manage',
+          path:'manage',
         },
         {
           key:'客服管理',
-          path:'list-power',
+          path:'servicer',
+          route:'/power/servicer'
         },
         {
           key:'操作日志',
-          path:'list-power',
+          path:'operlog',
+          route:'/power/operlog'
         },
-        {
+        /*{
           key:'数据库管理',
           path:'list-power',
-        },
+        },*/
       ]
     }
   ],

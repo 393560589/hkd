@@ -1,5 +1,6 @@
 import React,{PureComponent} from 'react'
 import { Button } from 'antd'
+import {Card} from '../../components/Card'
 import { connect } from 'dva'
 @connect(({index})=>({index}))
 
@@ -8,12 +9,7 @@ export default class Home extends PureComponent{
   render(){
     return (
      <div className="content">
-      <div className="con-title">
-        <div className="titlesec">
-          <span className="left">系统首页</span>
-          <a className="right refresh">刷新</a>
-        </div>
-      </div>
+       <Card>系统首页</Card>
       <div className="tablebox">
         <div className="zlshow">
           <ul>

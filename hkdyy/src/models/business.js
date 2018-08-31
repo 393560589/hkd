@@ -4,11 +4,34 @@ export default {
   namespace: 'business',
 
   state: {
-    keypath:''
+    keypath:'list-home',
+    localword:''
   },
 
   subscriptions: {
     setup({ dispatch, history }) {
+      history.listen((location) => {
+        if(location.pathname) {
+          let path = location.pathname;
+          //监听返回上一页 leftnav 高亮跳转显示用
+          dispatch({
+            type:'save',
+            payload:{
+              localword:path,
+              keypath: path.indexOf('home')>-1? 'list-home':
+                       path.indexOf('member')>-1? 'list-member':
+                         path.indexOf('promotion')>-1? 'list-sales':
+                           path.indexOf('operate')>-1? 'list-operate':
+                             path.indexOf('commodity')>-1? 'list-goods':
+                               path.indexOf('statistics')>-1? 'list-count':
+                                 path.indexOf('finance')>-1? 'list-financ':
+                                   path.indexOf('setup')>-1? 'list-set':
+                                     path.indexOf('power')>-1? 'list-power':
+                       path.indexOf('business')>-1?'list-seller':null
+            }
+          })
+        }
+      });
     },
   },
 

@@ -5,11 +5,13 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import router from 'umi/router'
 @connect(({business})=>({
-  keypath:business.keypath
+  keypath:business.keypath,
+  localword:business.localword
 }))
 export default class Leftnav extends Component{
 	render(){
-    const { keypath } = this.props;
+    const { keypath, localword} = this.props;
+    console.log(this.props);
 		return(
 			<Fragment>
         <Menu
@@ -29,10 +31,13 @@ export default class Leftnav extends Component{
 			)
 	}
 }
+//pathname
+//status
+
 const Menu = (props) =>{
   const children = props.children;
-  const path = props.keypath;
-  const { dispatch } = props;
+  const localword = props.localword;
+  const { dispatch ,location} = props;
   return (
     <div className="nav-lo">
       <ul>
@@ -43,14 +48,15 @@ const Menu = (props) =>{
                 dispatch({
                   type:'business/save',
                   payload:{
-                    keypath:child.path
+                    keypath:child.path,
+                    localword:child.status
                   }
                 })
               }}>
                 <img alt={child.key} src={child.icon} />
                 <span>{child.key}</span>
                 <img
-                  style={{display:child.path === path ? 'block':"none"}}
+                  style={{display: localword.indexOf(child.status) > -1? 'block':"none"}}
                   src={require('../assets/ico3.png')} className={classNames('acioc')} alt="高亮"/>
               </li>
             )
@@ -62,7 +68,7 @@ const Menu = (props) =>{
   )
 }
 const ChildrenRouter = (props) =>{
-  let blockword = props.arrays.length>0 ? props.arrays[0].keyword :'none';
+  let blockword = props.arrays.length>0 ? props.arrays[0].keyword : null;
   const { pathname } = props;
   return (
     <div className={classNames('navchild')} style={{display:props.keypath == blockword?'block':'none'}}>
@@ -70,14 +76,13 @@ const ChildrenRouter = (props) =>{
         props.arrays.map((item,i)=>{
           return (
             <Fragment key={i}>
-              <span>系统首页</span>
+              <span>{item.title}</span>
               {
                 item.children.map((child,index)=>{
                   return (
                     <ul key={index}>
                       <li id="navhome"
-                          className={classNames({'active':pathname === child.route})}
-
+                          className={classNames({'active':pathname.indexOf(child.path)>-1})}
                         onClick={()=>{router.push(child.route)}}
                       ><a>• { child.key }</a></li>
                     </ul>

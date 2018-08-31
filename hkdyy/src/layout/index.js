@@ -1,4 +1,4 @@
-import React,{PureComponent} from 'react'
+import React,{PureComponent,Fragment} from 'react'
 import {connect} from 'dva'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import withRouter from 'umi/withRouter'
@@ -28,8 +28,13 @@ class App extends PureComponent {
           transitionEnterTimeout={300}
           transitionLeaveTimeout={300}>
             <div key={this.props.location.pathname}>
-              <Top/>
-              <LeftNav {...this.props}/>
+              {
+                this.props.location.pathname !== '/login' ? <Fragment>
+                  <Top/>
+                  <LeftNav {...this.props}/>
+                </Fragment>:null
+
+              }
               {
                 this.props.children
               }
