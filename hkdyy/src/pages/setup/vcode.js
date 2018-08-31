@@ -1,6 +1,7 @@
 import React,{PureComponent} from 'react'
 import { Button, } from 'antd'
-//import styles from './accountset.less'
+import {Card} from '../../components/Card'
+import styles from './activity.css'
 
 import { connect } from 'dva'
 @connect(({index})=>({index}))
@@ -8,148 +9,77 @@ import { connect } from 'dva'
 export default class Accountset extends PureComponent{
   render(){
     return (
-      <div className="content">
-        <div className="con-title">
-          <div className="titlesec">
-            <span className="left">会员列表</span>
-            <a className="right refresh">刷新</a>
-          </div>
-        </div>
-        <div className="tablebox">
-          <div className="screen">
-            <div className="tip-title">
-              <i className="tip1 left fa fa-search"></i>
-              <span className="left">筛选查询</span>
-              <div className="right">
-                <i className="tip2 fa fa-angle-up"></i>
-                <span>收起筛选</span>
-                <a>查询结果</a>
-                <a>高级检索</a>
-              </div>
-            </div>
-            <div className="scr-con">
-              <span>用户账号：</span>
-              <input type="text" placeholder="用户ID/账号" name=""/>
-                <span>用户昵称：</span>
-                <input type="text" placeholder="用户昵称" name=""/>
-                  <span>注册时间:</span>
-                  <div className="left"><input type="text" placeholder="请选择时间" name="" id="chistime"/><i
-                    className="fa fa-clock-o"/></div>
-            </div>
-          </div>
-          <div className="datalist">
-            <div className="tip-title">
-              <i className="tip1 left fa fa-list-ul"></i>
-              <span className="left">数据列表</span>
-              <div className="right">
-                <select>
-                  <option value="" disabled selected hidden>群发短信</option>
-                  <option value="">选中用户</option>
-                  <option value="">全部用户</option>
-                </select>
-                <select>
-                  <option value="" disabled selected hidden>群发站内信</option>
-                  <option value="">选中用户</option>
-                  <option value="">全部用户</option>
-                </select>
-                <select>
-                  <option value="" disabled selected hidden>设置标签</option>
-                  <option value="">选中用户</option>
-                  <option value="">全部用户</option>
-                </select>
-                <select>
-                  <option value="" disabled selected hidden>导出数据</option>
-                  <option value="">选中用户</option>
-                  <option value="">全部用户</option>
-                </select>
-                <select disabled="disabled">
-                  <option value="" disabled selected hidden>显示条数</option>
-                  <option value="">20</option>
-                  <option value="">30</option>
-                  <option value="">40</option>
-                </select>
-                <select disabled="disabled">
-                  <option value="" disabled selected hidden>排序方式</option>
-                </select>
-              </div>
-            </div>
-            <table width="100%" className="litable">
-              <tr>
-                <th><input type="checkbox" className="choice" name=""/><i
-                  className="choiceshow allchoice fa fa-square-o"></i></th>
-                <th>会员ID</th>
-                <th>会员账号</th>
-                <th>会员名称</th>
-                <th>会员等级</th>
-                <th>消费金额</th>
-                <th>订单数量</th>
-                <th>创建时间</th>
-                <th>账户启用状态</th>
-                <th>操作</th>
-              </tr>
-              <tr>
-                <td><input type="checkbox" className="choice" name=""/><i className="choiceshow fa fa-square-o"></i></td>
-                <td>8848</td>
-                <td>15154554846</td>
-                <td>大风车</td>
-                <td>初级会员</td>
-                <td>¥2000.00</td>
-                <td>100</td>
-                <td>2018.2.23</td>
-                <td><input type="checkbox" className="oclse" name=""/><i className="oclseshow fa fa-toggle-off"/></td>
-                <td className="operat"><a href="../menber/menberman.html">查看</a><a
-                  href="../menber/menberedit.html">编辑</a><a>一键进入</a></td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" className="choice" name=""/><i className="choiceshow fa fa-square-o"></i></td>
-                <td>8848</td>
-                <td>15154554846</td>
-                <td>大风车</td>
-                <td>初级会员</td>
-                <td>¥2000.00</td>
-                <td>100</td>
-                <td>2018.2.23</td>
-                <td><input type="checkbox" className="oclse" checked="" name=""/><i
-                  className="oclseshow fa fa-toggle-off"></i></td>
-                <td className="operat"><a>查看</a><a>编辑</a><a>一键进入</a></td>
-              </tr>
-            </table>
-            <div className="tip-botbox">
+     <div className="content">
+     <Card>验证码设置</Card>
+     <div className="tablebox">
+        <div className={styles.addbox}>
+          <div className="tip-title">
+            <span className="left"  style={{marginLeft:"20px"}}>验证码设置</span>
+          </div> 
+          <ul>
+            <li>
+              <span><b>* </b>启用验证码：</span>
               <div className="left">
-                <input type="checkbox" className="choice" name=""/><i
-                  className="choiceshow allchoice fa fa-square-o"></i>
-                  <span>全选</span>
-                  <select>
-                    <option value="" disabled selected hidden>批量操作</option>
-                    <option value="">启用</option>
-                    <option value="">停用</option>
-                    <option value="">删除</option>
-                  </select>
-                  <a>确定</a>
+              <label className="goodsl"><input type="checkbox" className="goodsk" name="" /><i className="goodsi fa fa-square-o"></i>新用户注册</label><br/>
+              <label className="goodsl"><input type="checkbox" className="goodsk" name="" /><i className="goodsi fa fa-square-o"></i>用户登录</label><br/>
+              <label className="goodsl"><input type="checkbox" className="goodsk" name="" /><i className="goodsi fa fa-square-o"></i>发表相关评论</label><br/>
+              <label className="goodsl"><input type="checkbox" className="goodsk" name="" /><i className="goodsi fa fa-square-o"></i>后台系统登录 </label>
               </div>
-              <div className="right">
-                <span className="left">共<font>10</font>页/<font>100</font>条数据</span>
-                <ul className="left flypag">
-                  <li><a>
-                    1
-                  </a></li>
-                  <li><a className="active">1</a></li>
-                  <li><a>2</a></li>
-                  <li><a>3</a></li>
-                  <li><a>4</a></li>
-                  <li><a>5</a></li>
-                  <li><a>...</a></li>
-                  <li><a>10</a></li>
-                  <li><a>></a></li>
-                </ul>
-                <div className="left">
-                  跳至<input type="text" className="tiz" value="1"/>页
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+              
+              <font>启用验证码可以避免恶意批量评论或提交信息，推荐打开验证码功能。注意: 启用验证码<br/>会使得部分操作变得繁琐，建议仅在必需时打开</font>
+            </li>
+            <li>
+              <span><b>* </b>登录失败时显示验证码：</span>
+              <label>
+                <input type="radio" className="radiox" checked="" name="goloine" /><i className="radioshow fa fa-circle-o"></i>
+                关闭
+              </label>
+              <label>
+                <input type="radio" className="radiox" name="goloine" /><i className="radioshow fa fa-circle-o"></i>
+                开启
+              </label>
+              <font>选择“是”将在用户登录失败 3 次后才显示验证码，选择“否”将始终在登录时显示验证<br/>码。注意: 只有在启用了用户登录验证码时本设置才有效</font>
+            </li>
+            <li>
+              <span><b>* </b>验证码方式：</span>
+              <label>
+                <input type="radio" className="radiox" checked="" name="goloine" /><i className="radioshow fa fa-circle-o"></i>
+                图形验证码
+              </label>
+              <label>
+                <input type="radio" className="radiox" name="goloine" /><i className="radioshow fa fa-circle-o"></i>
+                滑动验证码
+              </label>
+            </li>
+            <li>
+              <span><b>* </b>图形验证码宽度：</span>
+              <input type="text" className="alin" name="" />
+              <font>验证码图片的宽度，范围在 40～145 之间</font>
+            </li>
+             <li>
+              <span><b>* </b>图形验证码高度：</span>
+              <input type="text" className="alin" name="" />
+              <font>验证码图片的高度，范围在 15～50 之间</font>
+            </li>
+             <li>
+              <span><b>* </b>图形验证码内容大小：</span>
+              <input type="text" className="alin" name="" />
+              <font>验证码内容大小，范围在16-20之间</font>
+            </li>
+             <li>
+              <span><b>* </b>图形验证码位数：</span>
+              <input type="text" className="alin" name="" />
+              <font>图形验证码位数，范围4-6之间</font>
+            </li>
+             <li>
+              <span><b>* </b>图形验证码预览：</span>
+              
+            </li>
+          </ul>
+          <a className={styles.upbtn}>提交</a>
+        </div> 
+     </div>
+    </div>
 
     )
   }
