@@ -2,7 +2,7 @@ import styles from './index.less'
 import {Button,Icon} from 'antd'
 import React,{PureComponent} from 'react'
 
-export class Card extends PureComponent{
+export default class Card extends PureComponent{
   state={
     loading:false
   }

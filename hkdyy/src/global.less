@@ -5,7 +5,7 @@ input,ol,ul,li,h1,h2,h3,h4,h5,div,p,span{margin:0; padding:0;box-sizing: border-
 body{ font-size:14px; color:#666; font-family: "寰蒋闆呴粦"; }
 ol,ul,li{ list-style:none;}
 img{ border:0 none;}
-div{ overflow: hidden;}
+div.divhidden{ overflow: hidden;}
 a{cursor:pointer; color:#666; text-decoration:none }
 a:link,a:visited{ text-decoration:none;}
 a:hover{ color: #1abc9c;}
@@ -64,7 +64,7 @@ html,body{
   top: 0;
   left: 0;
   overflow: visible;
-  z-index: 666666666;
+  z-index: 1;
 }
 .top h1{
   font-size: 18px;
@@ -758,4 +758,9 @@ i.fa-dot-circle-o{
   float: left;
   margin-top: 8px;
   width: 150px;
+}
+.fl-sp{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
