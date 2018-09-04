@@ -1,19 +1,14 @@
 import React,{PureComponent,Fragment} from 'react'
-
-
+import Header from '../../components/Card'
+import Screen from '../../components/Screen'
 export default class BusinessList extends PureComponent{
   render(){
     return (
       <Fragment>
         <div className="content">
-          <div className="con-title">
-            <div className="titlesec">
-              <span className="left">商家列表</span>
-              <a className="right refresh">刷新</a>
-            </div>
-          </div>
+          <Header>商家列表</Header>
           <div className="tablebox">
-            <div className="screen">
+           {/* <div className="screen">
               <div className="tip-title">
                 <i className="tip1 left fa fa-search"></i>
                 <span className="left">筛选查询</span>
@@ -35,7 +30,8 @@ export default class BusinessList extends PureComponent{
                       <i className="fa fa-clock-o"/>
                     </div>
               </div>
-            </div>
+            </div>*/}
+            <Screen />
             <div className="datalist">
               <div className="tip-title">
                 <i className="tip1 left fa fa-list-ul"></i>

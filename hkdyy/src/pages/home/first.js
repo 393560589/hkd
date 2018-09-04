@@ -110,7 +110,30 @@ export default class Home extends PureComponent{
 
         <Headerblock />
         {/*未注入数据之前先这样处理*/}
-        <FastGo />
+        <div className="shortenter" style={{marginBottom:'20px'}}>
+          <div className="tip-title" style={{lineHeight:'56px',height:'56px'}}>
+            <h3 className="left">运营快捷入口</h3>
+          </div>
+          <ul>
+            <li><a>
+              <img src={require("../../assets/u254.png")}/>
+                <span>用户管理</span>
+            </a></li>
+            <li><a>
+              <img src={require("../../assets/u258.png")}/>
+                <span>交易统计</span>
+            </a></li>
+            <li><a>
+              <img src={require("../../assets/u263.png")}/>
+                <span>短信营销</span>
+            </a></li>
+            <li><a>
+              <img src={require("../../assets/u265.png")}/>
+                <span>广告管理</span>
+            </a></li>
+          </ul>
+        </div>
+        <MesDetail />
 
         <Tabs defaultActiveKey="1"
               tabBarExtraContent={salesExtra}
@@ -181,8 +204,9 @@ const Headerblock=(props)=>{
       )}
     />
   )
-}
-const FastGo=(props)=>{
+};
+
+const MesDetail=(props)=>{
 
   const gridStyle = {
     width: '25%',
@@ -218,7 +242,7 @@ const FastGo=(props)=>{
     <Card
       headStyle={{backgroundColor:'#f3f3f3'}}
       bodyStyle={{ padding: 0 }}
-      title={<p>运营快捷入口</p>}>
+      title={<p>用户总览</p>}>
       {
         yydata.map((item,index)=>{
           return (

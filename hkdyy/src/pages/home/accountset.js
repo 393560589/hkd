@@ -1,20 +1,19 @@
 import React,{PureComponent} from 'react'
-import { Button, } from 'antd'
+import { Button,Form,Input,AutoComplete } from 'antd'
 import styles from './accountset.less'
-
+import Header from '../../components/Card'
 import { connect } from 'dva'
+
+const FormItem = Form.Item;
+
 @connect(({index})=>({index}))
 
 export default class Accountset extends PureComponent{
   render(){
     return (
       <div className="content">
-        <div className="con-title">
-          <div className="titlesec">
-            <span className="left">账户设置</span>
-            <a className="right refresh">刷新</a>
-          </div>
-        </div>
+
+        <Header>账户设置</Header>
         <div className="tablebox">
           <div className={styles.actset}>
             <div className="tip-title">
@@ -28,23 +27,23 @@ export default class Accountset extends PureComponent{
               <ul>
                 <li>
                   <span><b>*</b>用户名：</span>
-                  <input type="text" disabled="disabled" value="admin" name=""/>
+                  <Input type="text" disabled="disabled" value="admin" name=""/>
                 </li>
                 <li>
                   <span><b>*</b>Email：</span>
-                  <input type="text" disabled="disabled" value="1212122@qq.com" name=""/>
+                  <Input type="text" disabled="disabled" value="1212122@qq.com" name=""/>
                 </li>
                 <li>
                   <span><b>*</b>旧密码：</span>
-                  <input type="password" name=""/>
+                  <Input type="password" name=""/>
                 </li>
                 <li>
                   <span><b>*</b>新密码：</span>
-                  <input type="password" name=""/>
+                  <Input type="password" name=""/>
                 </li>
                 <li>
                   <span><b>*</b>确认密码：</span>
-                  <input type="password" name=""/>
+                  <Input type="password" name=""/>
                 </li>
               </ul>
               <Button type={'primary'} style={{marginTop:'20px'}} className={styles.uppasswd}>提交</Button>
