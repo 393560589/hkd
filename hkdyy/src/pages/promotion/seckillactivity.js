@@ -1,20 +1,139 @@
 import React,{PureComponent} from 'react'
-import { Button, } from 'antd'
+import { Button, Table , Divider ,Switch , Select ,Input} from 'antd'
+import Header from '../../components/Card'
 //import styles from './accountset.less'
 
 import { connect } from 'dva'
+
+const data = [{
+  key: '1',
+  number:'100000',
+  name: '春季家电家具疯狂秒杀',
+  state:'活动进行中',
+  begin:'2017-07-20',
+  end:'2017-07-21',
+  updown:''
+ 
+}, {
+  key: '2',
+  number:'100000',
+  name: '春季家电家具疯狂秒杀',
+  state:'活动进行中',
+  begin:'2017-07-20',
+  end:'2017-07-21',
+  updown:''
+  
+}];
+
+const Option = Select.Option;
 @connect(({index})=>({index}))
 
-export default class Accountset extends PureComponent{
+export default class Seckillactivity extends PureComponent{
+
+   state = {
+    filteredInfo: null,
+    sortedInfo: null,
+  };
+
+  handleChange = (pagination, filters, sorter) => {
+    console.log('Various parameters', pagination, filters, sorter);
+    this.setState({
+      filteredInfo: filters,
+      sortedInfo: sorter,
+    });
+  }
+
+   selhandleChange(value) {
+  console.log(`selected ${value}`);
+}
+
+ selhandleBlur() {
+  console.log('blur');
+}
+
+ selhandleFocus() {
+  console.log('focus');
+}
+
+
+  clearFilters = () => {
+    this.setState({ filteredInfo: null });
+  }
+
+  clearAll = () => {
+    this.setState({
+      filteredInfo: null,
+      sortedInfo: null,
+    });
+  }
+
+  setAgeSort = () => {
+    this.setState({
+      sortedInfo: {
+        order: 'descend',
+        columnKey: 'age',
+      },
+    });
+  }
+
+
   render(){
+
+           let { sortedInfo, filteredInfo } = this.state;
+    sortedInfo = sortedInfo || {};
+    filteredInfo = filteredInfo || {};
+    const columns = [{
+      title: '编号',
+      dataIndex: 'number',
+      key: 'number',
+    }, {
+      title: '活动标题',
+      dataIndex: 'name',
+      key: 'name',
+    },
+    {
+      title:'活动状态',
+      dataIndex:'state',
+      key:'state'
+    },
+     {
+      title:'开始时间',
+      dataIndex:'begin',
+      key:'begin'
+    },
+     {
+      title:'结束时间',
+      dataIndex:'end',
+      key:'end'
+    },
+    {
+      title:'上线/下架',
+      dataIndex:'updown',
+      key:'updown',
+      align:'center',
+      render:()=>(
+          <Switch defaultChecked onChange={this.onChange} />
+        )
+    },
+    {
+      title:'操作',
+      dataIndex:'action',
+      key:'action',
+      render: (text, record) => (
+        <span>
+          <a href="javascript:;">设置商品</a>
+          <Divider type="vertical" />
+          <a href="javascript:;">编辑</a>
+          <Divider type="vertical" />
+          <a href="javascript:;">删除</a>
+        </span>
+      )
+    }];
+
+
     return (
       <div className="content">
-        <div className="con-title">
-          <div className="titlesec">
-            <span className="left">会员列表</span>
-            <a className="right refresh">刷新</a>
-          </div>
-        </div>
+         <Header>秒杀活动列表</Header>
         <div className="tablebox">
           <div className="screen">
             <div className="tip-title">
@@ -37,117 +156,47 @@ export default class Accountset extends PureComponent{
                     className="fa fa-clock-o"/></div>
             </div>
           </div>
-          <div className="datalist">
-            <div className="tip-title">
-              <i className="tip1 left fa fa-list-ul"></i>
-              <span className="left">数据列表</span>
-              <div className="right">
-                <select>
-                  <option value="" disabled selected hidden>群发短信</option>
-                  <option value="">选中用户</option>
-                  <option value="">全部用户</option>
-                </select>
-                <select>
-                  <option value="" disabled selected hidden>群发站内信</option>
-                  <option value="">选中用户</option>
-                  <option value="">全部用户</option>
-                </select>
-                <select>
-                  <option value="" disabled selected hidden>设置标签</option>
-                  <option value="">选中用户</option>
-                  <option value="">全部用户</option>
-                </select>
-                <select>
-                  <option value="" disabled selected hidden>导出数据</option>
-                  <option value="">选中用户</option>
-                  <option value="">全部用户</option>
-                </select>
-                <select disabled="disabled">
-                  <option value="" disabled selected hidden>显示条数</option>
-                  <option value="">20</option>
-                  <option value="">30</option>
-                  <option value="">40</option>
-                </select>
-                <select disabled="disabled">
-                  <option value="" disabled selected hidden>排序方式</option>
-                </select>
+          <div style={{marginTop:40}}>
+              <div className="table-operations" style={{textAlign:'right',paddingBottom:'20px'}}>
+                <Button onClick={this.setAgeSort}>添加活动</Button>
+                <Button style={{marginLeft:10}} onClick={this.setAgeSort}>秒杀时间段列表</Button>
+                <Select
+                  showSearch
+                  style={{ width: 100,marginLeft:10}}
+                  placeholder="显示条数"
+                  optionFilterProp="children"
+                  onChange={this.selhandleChange}
+                  onFocus={this.selhandleFocus}
+                  onBlur={this.selhandleBlur}
+                  filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+                >
+                  <Option value="30">30</Option>
+                  <Option value="40">40</Option>
+                  <Option value="50">50</Option>
+                </Select>
+                <Select
+                  showSearch
+                  style={{ width: 100,marginLeft:10}}
+                  placeholder="排序方式"
+                  optionFilterProp="children"
+                  onChange={this.selhandleChange}
+                  onFocus={this.selhandleFocus}
+                  onBlur={this.selhandleBlur}
+                  filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+                >
+                  <Option value="时间">时间</Option>
+                </Select>
               </div>
+              <Table 
+                  bordered={true}
+                  title={()=>('数据列表')}
+                  loading={false}
+        
+                  position={'center'} 
+                  columns={columns} 
+                  dataSource={data} 
+                  onChange={this.handleChange} />
             </div>
-            <table width="100%" className="litable">
-              <tr>
-                <th><input type="checkbox" className="choice" name=""/><i
-                  className="choiceshow allchoice fa fa-square-o"></i></th>
-                <th>会员ID</th>
-                <th>会员账号</th>
-                <th>会员名称</th>
-                <th>会员等级</th>
-                <th>消费金额</th>
-                <th>订单数量</th>
-                <th>创建时间</th>
-                <th>账户启用状态</th>
-                <th>操作</th>
-              </tr>
-              <tr>
-                <td><input type="checkbox" className="choice" name=""/><i className="choiceshow fa fa-square-o"></i></td>
-                <td>8848</td>
-                <td>15154554846</td>
-                <td>大风车</td>
-                <td>初级会员</td>
-                <td>¥2000.00</td>
-                <td>100</td>
-                <td>2018.2.23</td>
-                <td><input type="checkbox" className="oclse" name=""/><i className="oclseshow fa fa-toggle-off"/></td>
-                <td className="operat"><a href="../menber/menberman.html">查看</a><a
-                  href="../menber/menberedit.html">编辑</a><a>一键进入</a></td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" className="choice" name=""/><i className="choiceshow fa fa-square-o"></i></td>
-                <td>8848</td>
-                <td>15154554846</td>
-                <td>大风车</td>
-                <td>初级会员</td>
-                <td>¥2000.00</td>
-                <td>100</td>
-                <td>2018.2.23</td>
-                <td><input type="checkbox" className="oclse" checked="" name=""/><i
-                  className="oclseshow fa fa-toggle-off"></i></td>
-                <td className="operat"><a>查看</a><a>编辑</a><a>一键进入</a></td>
-              </tr>
-            </table>
-            <div className="tip-botbox">
-              <div className="left">
-                <input type="checkbox" className="choice" name=""/><i
-                  className="choiceshow allchoice fa fa-square-o"></i>
-                  <span>全选</span>
-                  <select>
-                    <option value="" disabled selected hidden>批量操作</option>
-                    <option value="">启用</option>
-                    <option value="">停用</option>
-                    <option value="">删除</option>
-                  </select>
-                  <a>确定</a>
-              </div>
-              <div className="right">
-                <span className="left">共<font>10</font>页/<font>100</font>条数据</span>
-                <ul className="left flypag">
-                  <li><a>
-                    1
-                  </a></li>
-                  <li><a className="active">1</a></li>
-                  <li><a>2</a></li>
-                  <li><a>3</a></li>
-                  <li><a>4</a></li>
-                  <li><a>5</a></li>
-                  <li><a>...</a></li>
-                  <li><a>10</a></li>
-                  <li><a>></a></li>
-                </ul>
-                <div className="left">
-                  跳至<input type="text" className="tiz" value="1"/>页
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
 

@@ -1,16 +1,16 @@
 import React,{PureComponent} from 'react'
 import { Button, } from 'antd'
-import {Card} from '../../components/Card'
+import Header from '../../components/Card'
 import styles from './activity.css'
 
 import { connect } from 'dva'
 @connect(({index})=>({index}))
 
-export default class Accountset extends PureComponent{
+export default class Vcode extends PureComponent{
   render(){
     return (
      <div className="content">
-     <Card>验证码设置</Card>
+     <Header>验证码设置</Header>
      <div className="tablebox">
         <div className={styles.addbox}>
           <div className="tip-title">

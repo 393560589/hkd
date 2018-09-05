@@ -1,16 +1,16 @@
 import React,{PureComponent} from 'react'
 import { Button, } from 'antd'
-import {Card} from '../../components/Card'
+import Header from '../../components/Card'
 //import styles from './accountset.less'
 
 import { connect } from 'dva'
 @connect(({index})=>({index}))
 
-export default class Accountset extends PureComponent{
+export default class Payset extends PureComponent{
   render(){
     return (
       <div className="content">
-      <Card>支付设置</Card>
+      <Header>支付设置</Header>
       <div className="tablebox">
       <div className="codlistbox" style={{border:"1px solid #e4e4e4",background:"#fff"}}>
         <div className="tip-title">

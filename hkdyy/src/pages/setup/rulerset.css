@@ -5,6 +5,9 @@
 }
 .rultab{
 	margin-top: 50px;
+	clear: both;
+	overflow: hidden;
+
 }
 .rultab .title{
 	width: 180px;
@@ -15,6 +18,10 @@
 	line-height: 50px;
 	padding-left: 20px;
 	float: left;
+}
+.rultab .con{
+	float: left;
+	width: 890px;
 }
 .rultab .con li{
 	clear: both;

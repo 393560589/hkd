@@ -1,16 +1,16 @@
 import React,{PureComponent} from 'react'
 import { Button, } from 'antd'
-import {Card} from '../../components/Card'
+import Header from '../../components/Card'
 import styles from './msgrem.css'
 
 import { connect } from 'dva'
 @connect(({index})=>({index}))
 
-export default class Accountset extends PureComponent{
+export default class Stationmsg extends PureComponent{
   render(){
     return (
      <div className="content">
-     <Card>消息模板编辑</Card>
+     <Header>消息模板编辑</Header>
      <div className="tablebox">
         <div className={styles.msgbox}>
           <div className="tip-title">

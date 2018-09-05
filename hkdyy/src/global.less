@@ -1,7 +1,7 @@
 
 /* CSS Document */
 *{ margin:0; padding:0; outline:0; font-size: 100%;}
-input,ol,ul,li,h1,h2,h3,h4,h5,div,p,span{margin:0; padding:0;box-sizing: border-box}
+input,ol,ul,li,h1,h2,h3,h4,h5,div,p,span{margin:0; padding:0;box-sizing: content-box;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;}
 body{ font-size:14px; color:#666; font-family: "寰蒋闆呴粦"; }
 ol,ul,li{ list-style:none;}
 img{ border:0 none;}
@@ -763,4 +763,7 @@ i.fa-dot-circle-o{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+.tablebox .ant-table-thead > tr > th, .ant-table-tbody > tr > td{
+  padding:8px;
 }
