@@ -11,7 +11,7 @@ export default class Card extends PureComponent{
     return (
       <div className={styles["con-title"]}>
         <div className={styles["titlesec"]}>
-          <span className="left">{this.props.children}</span>
+          <span className="left spantitle">{this.props.children}</span>
             <Button icon="sync" loading={loading} className="right refresh"
                     onClick={()=>{
                       this.setState({

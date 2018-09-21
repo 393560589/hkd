@@ -1,6 +1,7 @@
 import React,{PureComponent} from 'react'
 import { Button, Table , Divider ,Switch , Select ,Input} from 'antd'
 import Header from '../../components/Card'
+import router from 'umi/router'
 //import styles from './accountset.less'
 
 import { connect } from 'dva'
@@ -147,9 +148,9 @@ export default class Coupons extends PureComponent{
       key:'action',
       render: (text, record) => (
         <span>
-          <a href="javascript:;">查看</a>
+          <a href="javascript:;" onClick={()=>{router.push('/promotion/coupondetail')}}>查看</a>
           <Divider type="vertical" />
-          <a href="javascript:;">编辑</a>
+          <a href="javascript:;" onClick={()=>{router.push('/promotion/addcoupon')}}>编辑</a>
           <Divider type="vertical" />
           <a href="javascript:;">删除</a>
         </span>
@@ -183,21 +184,8 @@ export default class Coupons extends PureComponent{
           </div>
             <div style={{marginTop:40}}>
               <div className="table-operations" style={{textAlign:'right',paddingBottom:'20px'}}>
-                <Button onClick={this.setAgeSort}>添加优惠券</Button>
-                <Select
-                  showSearch
-                  style={{ width: 100,marginLeft:10}}
-                  placeholder="显示条数"
-                  optionFilterProp="children"
-                  onChange={this.selhandleChange}
-                  onFocus={this.selhandleFocus}
-                  onBlur={this.selhandleBlur}
-                  filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
-                >
-                  <Option value="30">30</Option>
-                  <Option value="40">40</Option>
-                  <Option value="50">50</Option>
-                </Select>
+                <Button onClick={()=>{router.push('/promotion/addcoupon')}}>添加优惠券</Button>
+               
                 <Select
                   showSearch
                   style={{ width: 100,marginLeft:10}}
@@ -215,7 +203,14 @@ export default class Coupons extends PureComponent{
                   bordered={true}
                   title={()=>('数据列表')}
                   loading={false}
-        
+                  pagination={{ 
+                    showQuickJumper:true,
+                    showSizeChanger:true,
+                    total:100,
+                    showTotal: function () {  
+                        return '共 ' + 100 + ' 条数据'; 
+                    }
+                   }}
                   position={'center'} 
                   columns={columns} 
                   dataSource={data} 

@@ -1,13 +1,68 @@
 import React, { Component } from 'react';
-
+import router from 'umi/router'
+const color=[{
+	clname:'green',
+	color:'#1abc9c',
+	bordercolro:'#279c85'
+},
+{
+	clname:'blue',
+	color:'#3498db',
+	bordercolro:'#2a7aaf'
+},
+{
+	clname:'org',
+	color:'#ed6e4d',
+	bordercolro:'#be583e'
+},
+{
+	clname:'yel',
+	color:'#fabb3d',
+	bordercolro:'#c89631'
+},
+{
+	clname:'pur',
+	color:'#aa7ab3',
+	bordercolro:'#88628f'
+},
+{
+	clname:'tgreen',
+	color:'#9ad0b9',
+	bordercolro:'#7ba694'
+},
+{
+	clname:'pink',
+	color:'#ea94be',
+	bordercolro:'#bb7698'
+},
+{
+	clname:'dred',
+	color:'#c1374a',
+	bordercolro:'#9a2c3b'
+}];
 class Top extends Component{
+	constructor(props) {
+	    super(props);
+	    this.state = {
+	    	backcolor:'',
+	    	bordercolro:''
+	    }
+	  }
+
+	  colorChange(item){
+	  	this.setState({
+	  		backcolor:item.color,
+	    	bordercolro:item.bordercolro
+	  	});
+	  }
+
 	render(){
 		return(
-			<div className="top">
+			<div className="top" style={{background:this.state.backcolor,borderColor:this.state.bordercolro}}>
 				<h1 className="left">源货后台业务管理系统</h1>
 				<ul className="tnav">
 					<li>
-						<img alt="" src="../assets/u152.png" /><span>admin</span>
+						<img alt="" src={require('../assets/u152.png')} /><span>admin</span>
 						<div className="ntip  tn1">
 							<div className="tn-title">
 								<span className="left">账户信息</span>
@@ -21,9 +76,9 @@ class Top extends Component{
 							</div>
 						</div>
 					</li>
-					<li><i></i><a href=""><img alt="" src="../assets/u153.png" /></a></li>
+					<li><i></i><a href=""><img onClick={()=>{router.push('/home/first')}} alt="首页" src={require('../assets/u153.png')} /></a></li>
 					<li>
-						<i></i><img alt="" src="../assets/u155.png" />
+						<i></i><img alt="" src={require('../assets/u155.png')} />
 						<div className="ntip tn2">
 							<div className="tn-title">
 								<span className="left">常用菜单</span>
@@ -43,7 +98,7 @@ class Top extends Component{
 						</div>
 					</li>
 					<li>
-						<i></i><img alt="" src="../assets/u158.png" /><font>10</font>
+						<i></i><img alt="" src={require('../assets/u158.png')} /><font>10</font>
 						<div className="ntip tn3">
 							<div className="tn-title">
 								<span className="left">广告位提示</span>
@@ -56,21 +111,20 @@ class Top extends Component{
 						</div>
 					</li>
 					<li>
-						<i></i><img alt="" src="../assets/u150.png" />
+						<i></i><img alt="" src={require('../assets/u150.png')} />
 						<div className="ntip tn4">
 							<ul className="colors">
-								<li className="green" color="#1abc9c" border-c="#279c85"><span>点击换肤</span></li>
-								<li className="blue" color="#3498db" border-c="#2a7aaf"><span>点击换肤</span></li>
-								<li className="org" color="#ed6e4d" border-c="#be583e"><span>点击换肤</span></li>
-								<li className="yel" color="#fabb3d" border-c="#c89631"><span>点击换肤</span></li>
-								<li className="pur" color="#aa7ab3" border-c="#88628f"><span>点击换肤</span></li>
-								<li className="tgreen" color="#9ad0b9" border-c="#7ba694"><span>点击换肤</span></li>
-								<li className="pink" color="#ea94be" border-c="#bb7698"><span>点击换肤</span></li>
-								<li className="dred" color="#c1374a" border-c="#9a2c3b"><span>点击换肤</span></li>
+								{
+									color.map((item,i)=>{
+										return(
+											<li key={i} className={item.clname} onClick={this.colorChange.bind(this,item)}><span>点击换肤</span></li>
+											)
+									})
+								}
 							</ul>
 						</div>
 					</li>
-					<li><i></i><img alt="" src="../assets/u162.png" /></li>
+					<li><i></i><img alt="" src={require('../assets/u162.png')} /></li>
 				</ul>
 			</div>
 			);

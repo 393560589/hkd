@@ -1,6 +1,7 @@
 import React,{PureComponent} from 'react'
 import { Button, Table , Divider ,Switch , Select ,Input} from 'antd'
 import Header from '../../components/Card'
+import Goods from '../../components/goods'
 //import styles from './accountset.less'
 
 import { connect } from 'dva'
@@ -183,21 +184,7 @@ const rowSelection = {
           </div>
           <div>
           <div className="table-operations" style={{textAlign:'right',paddingBottom:'20px'}}>
-            <Button onClick={this.setAgeSort}>选择商品</Button>
-            <Select
-              showSearch
-              style={{ width: 100,marginLeft:10}}
-              placeholder="显示条数"
-              optionFilterProp="children"
-              onChange={this.selhandleChange}
-              onFocus={this.selhandleFocus}
-              onBlur={this.selhandleBlur}
-              filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
-            >
-              <Option value="30">30</Option>
-              <Option value="40">40</Option>
-              <Option value="50">50</Option>
-            </Select>
+            <Goods/>
             <Select
               showSearch
               style={{ width: 100,marginLeft:10}}
@@ -235,6 +222,14 @@ const rowSelection = {
                 )}
               loading={false}
               rowSelection={rowSelection}
+              pagination={{ 
+                  showQuickJumper:true,
+                  showSizeChanger:true,
+                  total:100,
+                  showTotal: function () {  
+                      return '共 ' + 100 + ' 条数据'; 
+                  }
+                 }}
               position={'center'} 
               columns={columns} 
               dataSource={data} 

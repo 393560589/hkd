@@ -48,8 +48,9 @@
 	margin-bottom: 10px;
 	overflow: hidden;
 	font-size: 14px;
+	line-height: 40px;
 }
-.addcouponbox ul.adul li span{
+.addcouponbox ul.adul li span.sp{
 	float: left;
 	display: block;
 	width: 100px;
@@ -61,12 +62,6 @@
 .addcouponbox ul.adul li select{
 	width: 240px;
 	height: 40px;
-	border: 1px solid #e4e4e4;
-	padding: 0 10px;
-}
-.addcouponbox ul.adul li input{
-	width: 218px;
-	height: 38px;
 	border: 1px solid #e4e4e4;
 	padding: 0 10px;
 }
@@ -83,10 +78,7 @@
 	width: 68px;
 	margin: 0 6px;
 }
-.addcouponbox ul.adul li label i{
-	font-size: 16px;
-	line-height: 40px;
-}
+
 .addcouponbox ul.adul li label{
 	margin-right: 10px;
 }
@@ -133,7 +125,7 @@
 	border-bottom: 1px dashed #e4e4e4;
 	overflow: hidden;
 }
-.appoint span{
+.appoint span.sp{
 	float: left;
 	display: block;
 	width: 100px;
@@ -146,8 +138,6 @@
 .addsel{
 	width: 298px;
 	height: 38px;
-	border: 1px solid #e4e4e4;
-	background: #fff;
 	float: left;
 }
 .addsel select{

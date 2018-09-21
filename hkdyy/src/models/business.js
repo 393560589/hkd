@@ -26,7 +26,7 @@ export default {
                                path.indexOf('statistics')>-1? 'list-count':
                                  path.indexOf('finance')>-1? 'list-financ':
                                    path.indexOf('setup')>-1? 'list-set':
-                                     path.indexOf('power')>-1? 'list-power':
+                                     path.indexOf('pawer')>-1? 'list-power':
                        path.indexOf('business')>-1?'list-seller':null
             }
           })

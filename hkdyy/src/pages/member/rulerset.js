@@ -1,5 +1,6 @@
 import React,{PureComponent} from 'react'
-import { Button, } from 'antd'
+import { Button,Switch } from 'antd'
+import Header from '../../components/Card'
 import styles from './index.less'
 
 import { connect } from 'dva'
@@ -9,11 +10,7 @@ export default class Accountset extends PureComponent{
   render(){
     return (
       <div className="content">
-        <div className="con-title">
-          <div className="titlesec">
-            <span className="left">更多规则设置</span>
-          </div>
-        </div>
+       <Header>更多规则设置</Header>
         <div className="tablebox">
           <div className={styles.rulerbox}>
             <div className={styles.rultab}>
@@ -21,7 +18,7 @@ export default class Accountset extends PureComponent{
                 <i className="fa fa-bookmark"></i>
                 <span>成长值规则设置</span>
               </div>
-              <div className={styles.con}>
+              <div style={{float:'left'}} className={styles.con}>
                 <ul>
                   <li>
                     <span>每连续签到：</span>
@@ -63,7 +60,7 @@ export default class Accountset extends PureComponent{
                 <i className="fa fa-bookmark"></i>
                 <span>蝌蚪币规则设置</span>
               </div>
-              <div className={styles.con}>
+              <div style={{float:'left'}} className={styles.con}>
                 <ul>
                   <li>
                     <span>每连续签到：</span>
@@ -105,7 +102,7 @@ export default class Accountset extends PureComponent{
                 <i className="fa fa-bookmark"></i>
                 <span>成长值规则设置</span>
               </div>
-              <div className={styles.con}>
+              <div style={{float:'left'}} className={styles.con}>
                 <ul>
                   <li>
                     <span>抵扣订单金额每：</span>
@@ -124,8 +121,7 @@ export default class Accountset extends PureComponent{
                   </li>
                   <li>
                     <span>与优惠券同时使用：</span>
-                    <input type="checkbox" checked="" className="oclse" name=""/><i
-                      className="oclseshow fa fa-toggle-off"></i>
+                    <Switch style={{width:44,marginTop:10,marginLeft:10}} defaultChecked onChange={this.onChange} />
                   </li>
                 </ul>
               </div>

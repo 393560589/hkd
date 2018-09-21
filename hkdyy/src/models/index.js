@@ -5,7 +5,17 @@ export default {
 
   state: {
     app:[],
-    list:'111'
+    list:'111',
+    addvisible:false,
+    ybmodvisible:false,
+    addactvisible:false,
+    addtimevisible:false,
+    systemvisible:false,
+    shortmvisible:false,
+    couponvisible:false,
+    logisticsvisible:false,
+    departmentvisible:false,
+    transfervisible:false
   },
 
   subscriptions: {

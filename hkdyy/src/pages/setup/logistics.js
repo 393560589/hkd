@@ -1,13 +1,117 @@
 import React,{PureComponent} from 'react'
-import { Button, } from 'antd'
+import { Button, Table , Divider ,Switch , Select} from 'antd'
 import Header from '../../components/Card'
+import Addlogistics from '../../components/addlogistics'
 //import styles from './accountset.less'
 
 import { connect } from 'dva'
+
+const data = [{
+  key: '1',
+  number:'10001',
+  name:'顺丰快递',
+  describe: '首重为5元/KG，续重为5元/KG。',
+  time:'2017-07-19 14:48:38',
+  updown:''
+}, {
+  key: '2',
+  number:'10001',
+  name:'顺丰快递',
+  describe: '首重为5元/KG，续重为5元/KG。',
+  time:'2017-07-19 14:48:38',
+  updown:''
+}];
+
+const Option = Select.Option;
 @connect(({index})=>({index}))
 
 export default class Logistics extends PureComponent{
+  constructor(props) {
+      super(props);
+      this.state = {
+        filteredInfo: null,
+        sortedInfo: null,
+      }
+     this.handleChange=this.handleChange.bind(this);
+     this.editonClick=this.editonClick.bind(this);
+    }
+  
+  handleChange(pagination, filters, sorter){
+    console.log('Various parameters', pagination, filters, sorter);
+    this.setState({
+      filteredInfo: filters,
+      sortedInfo: sorter,
+    });
+  }
+
+  editonClick(){
+    const { dispatch }=this.props;
+    dispatch({
+      type:'index/save',
+      payload:{
+        logisticsvisible:true
+      }
+    });
+  }
+
   render(){
+
+      let { sortedInfo, filteredInfo } = this.state;
+    sortedInfo = sortedInfo || {};
+    filteredInfo = filteredInfo || {};
+    const columns = [{
+      title: '编号',
+      dataIndex: 'number',
+      key: 'number',
+    }, {
+      title: '公司名称',
+      dataIndex: 'name',
+      key: 'name',
+    },
+    {
+      title: '配送描述',
+      dataIndex: 'describe',
+      key: 'describe',
+     
+    },
+    {
+      title:'添加时间',
+      dataIndex:'time',
+      key:'time'
+    },
+    {
+      title:'是否启用',
+      dataIndex:'updown',
+      key:'updown',
+      align:'center',
+      render:()=>(
+          <Switch defaultChecked onChange={this.onChange} />
+        )
+    },
+    
+    {
+      title:'操作',
+      dataIndex:'action',
+      key:'action',
+      render: (text, record) => (
+        <span>
+          <a href="javascript:;" onClick={this.editonClick}>编辑</a>
+          <Divider type="vertical" />
+          <a href="javascript:;">设置打印模板</a>
+          <Divider type="vertical" />
+          <a href="javascript:;">删除</a>
+        </span>
+      )
+    }];
+const rowSelection = {
+  onChange: (selectedRowKeys, selectedRows) => {
+    console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+  },
+  getCheckboxProps: record => ({
+    disabled: record.name === 'Disabled User', // Column configuration not to be checked
+    name: record.name,
+  }),
+};
     return (
       <div className="content">
       <Header>物流公司</Header>
@@ -33,81 +137,57 @@ export default class Logistics extends PureComponent{
               </select>
             </div>
           </div>
-      <div className="codlistbox" style={{border:"1px solid #e4e4e4",background:"#fff",marginTop: "20px"}}>
-        <div className="tip-title">
-          <i className="tip1 left fa fa-list-ul"></i>
-                <span className="left">数据列表</span>
-                <div className="right">
-                  <a>添加</a>
-                  <select disabled="disabled">
-                    <option value="" disabled selected hidden>显示条数</option>
-                    <option value="">20</option>
-                    <option value="">30</option>
-                    <option value="">40</option>
-                  </select>
-                  <select disabled="disabled">
-                    <option value="" disabled selected hidden>排序方式</option>
-                  </select>
-                </div>
+          <div style={{marginTop:20}}>
+            <div className="table-operations" style={{textAlign:'right',paddingBottom:'20px'}}>
+              <Addlogistics/>
+              <Select
+                showSearch
+                style={{ width: 100,marginLeft:10}}
+                placeholder="排序方式"
+                optionFilterProp="children"
+                onChange={this.selhandleChange}
+                onFocus={this.selhandleFocus}
+                onBlur={this.selhandleBlur}
+                filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+              >
+                <Option value="时间">时间</Option>
+              </Select>
             </div>
-            <table width="100%" className="litable">
-          <tr>
-            <th><input type="checkbox" className="choice" name="" /><i className="choiceshow allchoice fa fa-square-o"></i></th>
-            <th>编号</th>
-            <th>公司名称</th>
-            <th>配送描述</th>
-            <th>添加时间</th>
-            <th>是否启用</th>
-            <th>操作</th>
-          </tr>
-          <tr>
-            <td><input type="checkbox" className="choice" name="" /><i className="choiceshow fa fa-square-o"></i></td>
-            <td>1000001</td>
-            <td>顺丰快递</td>
-            <td>首重为5元/KG，续重为5元/KG。</td>
-            <td>2017-07-19 14:48:38</td>
-            <td><input type="checkbox" className="oclse" name="" /><i className="oclseshow fa fa-toggle-off"></i></td>
-            <td className="operat"><a>编辑</a><a>设置打印模板</a><a>删除</a></td>
-          </tr>
-          <tr>
-            <td><input type="checkbox" className="choice" name="" /><i className="choiceshow fa fa-square-o"></i></td>
-            <td>1000001</td>
-            <td>顺丰快递</td>
-            <td>首重为5元/KG，续重为5元/KG。</td>
-            <td>2017-07-19 14:48:38</td>
-            <td><input type="checkbox" className="oclse" name="" /><i className="oclseshow fa fa-toggle-off"></i></td>
-            <td className="operat"><a>编辑</a><a>设置打印模板</a><a>删除</a></td>
-          </tr>
-            </table>
-            <div className="tip-botbox">
-                <div className="left">
-                  <input type="checkbox" className="choice" name="" /><i className="choiceshow allchoice fa fa-square-o"></i>
-                  <span>全选</span>
-                   <select>
-                    <option value="" disabled selected hidden>批量操作</option>
-                    <option value="">删除</option>
-                  </select>
-                  <a>确定</a>
-                </div>
-                <div className="right">
-                  <span className="left">共<font>10</font>页/<font>100</font>条数据</span>
-                  <ul className="left flypag">
-                    <li><a>left</a></li>
-                    <li><a className="active">1</a></li>
-                    <li><a>2</a></li>
-                    <li><a>3</a></li>
-                    <li><a>4</a></li>
-                    <li><a>5</a></li>
-                    <li><a>...</a></li>
-                    <li><a>10</a></li>
-                    <li><a>right</a></li>
-                  </ul>
-                  <div className="left">
-                    跳至<input type="text" className="tiz" value="1" />页
-                  </div>
-                </div>
-              </div>
-      </div>
+            <Table 
+                bordered={true}
+                title={()=>('数据列表')}
+                footer={() => (
+                    <div>
+                     <Select
+                      showSearch
+                      style={{ width: 100,marginLeft:10}}
+                      placeholder="批量操作"
+                      optionFilterProp="children"
+                      onChange={this.selhandleChange}
+                      onFocus={this.selhandleFocus}
+                      onBlur={this.selhandleBlur}
+                      filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+                    >
+                      <Option value="删除">删除</Option>
+                    </Select>
+                    <Button style={{ marginLeft:10}} onClick={this.sureCos}>确定</Button>
+                    </div>
+                  )}
+                pagination={{ 
+                    showQuickJumper:true,
+                    showSizeChanger:true,
+                    total:100,
+                    showTotal: function () {  
+                        return '共 ' + 100 + ' 条数据'; 
+                    }
+                   }}
+                loading={false}
+                rowSelection={rowSelection}
+                position={'center'} 
+                columns={columns} 
+                dataSource={data} 
+                onChange={this.handleChange} />
+          </div>
         </div>
   </div>
 

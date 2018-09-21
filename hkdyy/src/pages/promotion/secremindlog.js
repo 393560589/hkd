@@ -2,6 +2,7 @@ import React,{PureComponent} from 'react'
 import { Button, Table , Divider ,Switch , Select} from 'antd'
 import Header from '../../components/Card'
 import styles from './secremind.css'
+import router from 'umi/router'
 
 import { connect } from 'dva'
 
@@ -143,8 +144,8 @@ const rowSelection = {
        <Header>通知日志</Header>
         <div className="tablebox">
           <div className={styles.sechretitle} style={{overflow:'hidden'}}>
-            <a href="../promotion/secremind.html">提醒通知</a>
-            <a className={styles.active} href="../promotion/secremindlog.html">通知日志</a>
+            <a  onClick={()=>{router.push('/promotion/secremind')}}>提醒通知</a>
+            <a className={styles.active} >通知日志</a>
           </div>
           <div className="screen">
             <div className="tip-title">
@@ -187,20 +188,7 @@ const rowSelection = {
                     <Option value="时间">一年之前</Option>
                   </Select>
                   <Button style={{ marginLeft:10}} onClick={this.sureCos}>确定</Button>
-                  <Select
-                    showSearch
-                    style={{ width: 100,marginLeft:10}}
-                    placeholder="显示条数"
-                    optionFilterProp="children"
-                    onChange={this.selhandleChange}
-                    onFocus={this.selhandleFocus}
-                    onBlur={this.selhandleBlur}
-                    filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
-                  >
-                    <Option value="30">30</Option>
-                    <Option value="40">40</Option>
-                    <Option value="50">50</Option>
-                  </Select>
+                  
     
                 </div>
                 <Table 
@@ -224,6 +212,14 @@ const rowSelection = {
                       <Button style={{ marginLeft:10}} onClick={this.sureCos}>确定</Button>
                       </div>
                     )}
+                      pagination={{ 
+                    showQuickJumper:true,
+                    showSizeChanger:true,
+                    total:100,
+                    showTotal: function () {  
+                        return '共 ' + 100 + ' 条数据'; 
+                    }
+                   }}
                     loading={false}
                     rowSelection={rowSelection}
                     position={'center'} 

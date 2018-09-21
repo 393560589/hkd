@@ -12,7 +12,7 @@ const dataSource = [{
   address: '广东深圳市',
   explorer:'火狐'
 }, {
-  key: '1',
+  key: '2',
   time: '18.01.01',
   ip: '192.168.0.101',
   address: '广东深圳市',
@@ -50,6 +50,14 @@ export default class Loginlog extends PureComponent{
               bordered={true}
               title={()=>('数据列表')}
               loading={false}
+              pagination={{ 
+                showQuickJumper:true,
+                showSizeChanger:true,
+                total:100,
+                showTotal: function () {  
+                    return '共 ' + 100 + ' 条数据'; 
+                }
+               }}
 
               position={'center'}
               dataSource={dataSource} columns={columns} />

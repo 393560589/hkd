@@ -1,7 +1,8 @@
 
 /* CSS Document */
 *{ margin:0; padding:0; outline:0; font-size: 100%;}
-input,ol,ul,li,h1,h2,h3,h4,h5,div,p,span{margin:0; padding:0;box-sizing: content-box;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;}
+input,ol,ul,li,h1,h2,h3,h4,h5,div,p,span{margin:0; padding:0;box-sizing: border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;}
+input[type="radio"], input[type="checkbox"],span{box-sizing: border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box}
 body{ font-size:14px; color:#666; font-family: "寰蒋闆呴粦"; }
 ol,ul,li{ list-style:none;}
 img{ border:0 none;}
@@ -107,7 +108,7 @@ html,body{
 }
 .tnav li span{
   float: left;
-  line-height: 50px;
+  line-height: 40px;
 }
 .tnav li:hover .ntip{
   display: block;
@@ -333,11 +334,6 @@ html,body{
 }
 .tip-title .right{
   margin-right: 20px;
-}
-.tip-title .right span{
-  color: #999;
-  float: left;
-  margin-right: 12px;
 }
 .tip-title .right a{
   display: block;
@@ -766,4 +762,82 @@ i.fa-dot-circle-o{
 }
 .tablebox .ant-table-thead > tr > th, .ant-table-tbody > tr > td{
   padding:8px;
+  text-align:center;
+}
+
+.ant-upload-list{
+  width:220px;
+  margin-left:190px;
+}
+
+.radioborder .ant-radio-button-wrapper{
+  border:0;
+}
+.radioborder .ant-radio-button-wrapper:not(:first-child)::before{
+  width:0;
+}
+.radioborder .ant-radio-button-wrapper:first-child{
+  border:0;
+}
+.radioborder .ant-radio-button-wrapper-checked{
+    -webkit-box-shadow: 0 0 0 0 #1abc9c;
+    box-shadow:0 0 0 0 #1abc9c;
+}
+.radioborder .ant-radio-button-wrapper-checked:hover {
+    border-color: #3cc9a9;
+    -webkit-box-shadow: 0 0 0 0 #3cc9a9;
+    box-shadow: 0 0 0 0 #3cc9a9;
+    color: #3cc9a9;
+}
+th{
+  background:#f9fafc;
+}
+td{
+  background:#fff;
+}
+.ant-table-title{
+  background: #f3f3f3
+}
+.spantitle{
+  border-left: 5px solid #1abc9c;
+  padding-left:6px;
+}
+.modelul .sp{
+  display:inline-block;
+  width:120px;
+  text-align:right;
+  float:left;
+ 
+}
+.modelul li{
+   line-height:40px;
+}
+.modelul .sp b{
+  margin-right:4px;
+}
+.modelul li font{
+  line-height:20px;
+  margin-left:120px;
+}
+.modelul li small{
+  font-size:14px;
+}
+.ant-card-head-title{
+  font-size:14px;
+  color:#999;
+}
+.ant-card-head-title span{
+  color:#333;
+}
+.ant-card-wider-padding .ant-card-body{
+  padding:20px;
+}
+.ant-card-wider-padding .ant-card-head{
+  padding: 0 20px;
+}
+.ant-card-head{
+  min-height:38px;
+}
+.ant-card-head-title{
+  padding:8px 0;
 }

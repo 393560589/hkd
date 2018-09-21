@@ -1,20 +1,105 @@
 import React,{PureComponent} from 'react'
-import { Button, } from 'antd'
+import { Button, Table, Select } from 'antd'
+import Header from '../../components/Card'
+import router from 'umi/router'
 //import styles from './accountset.less'
 
 import { connect } from 'dva'
+
+const data = [{
+  key: '1',
+  ordernum:'201707196398345',
+  ordermoney:'¥200.00',
+  paymethod: '支付宝 ',
+  paytime: '2017-07-19 14:48:38',
+  reconcil:'admin',
+  accountime:'2017-07-19 14:48:38',
+  state:'已对账',
+}, {
+  key: '2',
+  ordernum:'201707196398345',
+  ordermoney:'¥200.00',
+  paymethod: '支付宝 ',
+  paytime: '2017-07-19 14:48:38',
+  reconcil:'admin',
+  accountime:'2017-07-19 14:48:38',
+  state:'已对账',
+}];
+const Option = Select.Option;
 @connect(({index})=>({index}))
 
 export default class Accountset extends PureComponent{
+   state = {
+    filteredInfo: null,
+    sortedInfo: null,
+  }
+
+  handleChange = (pagination, filters, sorter) => {
+    console.log('Various parameters', pagination, filters, sorter);
+    this.setState({
+      filteredInfo: filters,
+      sortedInfo: sorter,
+    });
+  }
   render(){
+     let { sortedInfo, filteredInfo } = this.state;
+    sortedInfo = sortedInfo || {};
+    filteredInfo = filteredInfo || {};
+    const columns = [{
+      title: '订单编号',
+      dataIndex: 'ordernum',
+      key: 'ordernu',
+    }, {
+      title: '订单金额',
+      dataIndex: 'ordermoney',
+      key: 'ordermoney',
+    }, {
+      title: '支付方式',
+      dataIndex: 'paymethod',
+      key: 'paymethod',
+    },
+    {
+      title:'支付时间',
+      dataIndex:'paytime',
+      key:'paytime'
+    },
+    {
+      title:'对账人员',
+      dataIndex:'reconcil',
+      key:'reconcil'
+    },
+    {
+      title:'对账时间',
+      dataIndex:'accountime',
+      key:'accountime'
+    },
+    {
+      title:'状态',
+      dataIndex:'state',
+      key:'state'
+    },
+    {
+      title:'操作',
+      dataIndex:'action',
+      key:'action',
+      render: (text, record) => (
+        <span>
+          <a href="javascript:;" onClick={()=>{router.push('/finance/checkaccounts')}}>查看详情</a>
+        </span>
+      )
+    }];
+    const rowSelection = {
+  onChange: (selectedRowKeys, selectedRows) => {
+    console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+  },
+  getCheckboxProps: record => ({
+    disabled: record.name === 'Disabled User', // Column configuration not to be checked
+    name: record.name,
+  }),
+};
     return (
       <div className="content">
-        <div className="con-title">
-          <div className="titlesec">
-            <span className="left">对账列表</span>
-            <a className="right refresh">刷新</a>
-          </div>
-        </div>
+        <Header>对账列表</Header>
         <div className="tablebox">
           <div className="screen">
             <div className="tip-title">
@@ -49,91 +134,52 @@ export default class Accountset extends PureComponent{
                 </select>
             </div>
           </div>
-          <div className="datalist">
-            <div className="tip-title">
-              <i className="tip1 left fa fa-list-ul"></i>
-              <span className="left">数据列表</span>
-              <div className="right">
-                <a>批量对账</a>
-                <select>
-                  <option value="" disabled selected hidden>导出数据</option>
-                  <option value="">选中数据</option>
-                  <option value="">全部数据</option>
-                </select>
-                <select disabled="disabled">
-                  <option value="" disabled selected hidden>显示条数</option>
-                  <option value="">20</option>
-                  <option value="">30</option>
-                  <option value="">40</option>
-                </select>
-                <select disabled="disabled">
-                  <option value="" disabled selected hidden>排序方式</option>
-                </select>
+          <div style={{marginTop:20}}>
+              <div className="table-operations" style={{textAlign:'right',paddingBottom:'20px'}}>
+                 <Button onClick={this.setAgeSort}>批量对账</Button>
+                 <Select
+                  showSearch
+                  style={{ width: 100,marginLeft:10}}
+                  placeholder="导出数据"
+                  optionFilterProp="children"
+                  onChange={this.selhandleChange}
+                  onFocus={this.selhandleFocus}
+                  onBlur={this.selhandleBlur}
+                  filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+                >
+                  <Option value="选中数据">选中数据</Option>
+                  <Option value="全部数据">全部数据</Option>
+                </Select>
+                <Select
+                  showSearch
+                  style={{ width: 100,marginLeft:10}}
+                  placeholder="排序方式"
+                  optionFilterProp="children"
+                  onChange={this.selhandleChange}
+                  onFocus={this.selhandleFocus}
+                  onBlur={this.selhandleBlur}
+                  filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+                >
+                  <Option value="时间">时间</Option>
+                </Select>
               </div>
-            </div>
-            <table width="100%" className="litable">
-              <tr>
-                <th><input type="checkbox" className="choice" name=""/><i
-                  className="choiceshow allchoice fa fa-square-o"></i></th>
-                <th>订单编号</th>
-                <th>订单金额</th>
-                <th>支付方式</th>
-                <th>支付时间</th>
-                <th>对账人员</th>
-                <th>对账时间</th>
-                <th>状态</th>
-                <th>操作</th>
-              </tr>
-              <tr>
-                <td><input type="checkbox" className="choice" name=""/><i className="choiceshow fa fa-square-o"></i></td>
-                <td>201707196398345</td>
-                <td>¥200.00</td>
-                <td>支付宝</td>
-                <td>2017-07-19 14:48:38</td>
-                <td>admin</td>
-                <td>2017-07-19 14:48:38</td>
-                <td>已对账</td>
-                <td className="operat"><a href="../finance/checkaccounts.html">查看详情</a></td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" className="choice" name=""/><i className="choiceshow fa fa-square-o"></i></td>
-                <td>201707196398345</td>
-                <td>¥200.00</td>
-                <td>支付宝</td>
-                <td>2017-07-19 14:48:38</td>
-                <td>admin</td>
-                <td>2017-07-19 14:48:38</td>
-                <td>已对账</td>
-                <td className="operat"><a>查看详情</a></td>
-              </tr>
-            </table>
-            <div className="tip-botbox">
-              <div className="left">
-                <input type="checkbox" className="choice" name=""/><i
-                  className="choiceshow allchoice fa fa-square-o"></i>
-                  <span>全选</span>
-
-              </div>
-              <div className="right">
-                <span className="left">共<font>10</font>页/<font>100</font>条数据</span>
-                <ul className="left flypag">
-                  <li><a>
-                    1
-                  </a></li>
-                  <li><a className="active">1</a></li>
-                  <li><a>2</a></li>
-                  <li><a>3</a></li>
-                  <li><a>4</a></li>
-                  <li><a>5</a></li>
-                  <li><a>...</a></li>
-                  <li><a>10</a></li>
-                  <li><a>></a></li>
-                </ul>
-                <div className="left">
-                  跳至<input type="text" className="tiz" value="1"/>页
-                </div>
-              </div>
-            </div>
+              <Table 
+                  bordered={true}
+                  title={()=>('数据列表')}
+                  loading={false}
+                  pagination={{ 
+                    showQuickJumper:true,
+                    showSizeChanger:true,
+                    total:100,
+                    showTotal: function () {  
+                        return '共 ' + 100 + ' 条数据'; 
+                    }
+                   }}
+                  rowSelection={rowSelection}
+                  position={'center'} 
+                  columns={columns} 
+                  dataSource={data} 
+                  onChange={this.handleChange} />
           </div>
         </div>
       </div>

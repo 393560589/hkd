@@ -1,13 +1,45 @@
 import React,{PureComponent} from 'react'
-import { Button, } from 'antd'
+import { Button, Select , Radio ,Input, DatePicker,InputNumber} from 'antd'
 import Header from '../../components/Card'
+import Addfl from './addfl'
 import styles from './coupon.css'
 
 import { connect } from 'dva'
+const Option = Select.Option;
+const RadioGroup = Radio.Group;
+const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
 @connect(({index})=>({index}))
 
 export default class Addcoupon extends PureComponent{
+  state = {
+    value: 1,
+    value2:1,
+    value3:1,
+  }
+onChanged(date, dateString) {
+  console.log(date, dateString);
+}
+  onChange = (e) => {
+    console.log('radio checked', e.target.value);
+    this.setState({
+      value: e.target.value,
+    });
+  }
+  onChange2 = (e) => {
+    console.log('radio checked', e.target.value);
+    this.setState({
+      value2: e.target.value,
+    });
+  }
+  onChange3 = (e) => {
+    console.log('radio checked', e.target.value);
+    this.setState({
+      value3: e.target.value,
+    });
+  }
   render(){
+
+
     return (
       <div className="content">
       <Header>添加优惠券</Header>
@@ -18,122 +50,81 @@ export default class Addcoupon extends PureComponent{
         <div className={styles.addcouponbox}>
           <ul className={styles.adul}>
             <li>
-              <span>优惠券类型：</span>
-              <select>
-                <option>注册赠券</option>
-                <option>购物赠券</option>
-                <option>全场赠券</option>
-                <option>会员赠券</option>
-              </select>
+              <span className={styles.sp}>优惠券类型：</span>
+              <Select defaultValue="注册赠券" size="large" style={{ width: 240 }} >
+                <Option value="注册赠券">注册赠券</Option>
+                <Option value="购物赠券">购物赠券</Option>
+                <Option value="全场赠券">全场赠券</Option>
+                <Option value="会员赠券">会员赠券</Option>
+              </Select>
             </li>
             <li>
-              <span><b>* </b>优惠券名称：</span>
-              <input type="text" name="" />
+              <span className={styles.sp}><b>* </b>优惠券名称：</span>
+              <Input placeholder="" style={{width:240,height:40}} />
             </li>
             <li>
-              <span>适用平台：</span>
-              <select>
-                <option>全平台</option>
-                <option>PC端</option>
-                <option>移动端</option>
-              </select>
+              <span className={styles.sp}>适用平台：</span>
+              <Select defaultValue="全平台" size="large" style={{ width: 240 }} >
+                <Option value="全平台">全平台</Option>
+                <Option value="购物赠券">PC端</Option>
+                <Option value="全场赠券">移动端</Option>
+              </Select>
             </li>
             <li>
-              <span><b>* </b>总发行量：</span>
-              <input type="text" placeholder="只能输入正整数，输入0为无限制" name="" />
+              <span className={styles.sp}><b>* </b>总发行量：</span>
+              <InputNumber size="large" placeholder="只能输入正整数，输入0为无限制" style={{width:240,height:40,fontSize:14}} />
             </li>
             <li>
-              <span><b>* </b>面额：</span>
+              <span className={styles.sp}><b>* </b>面额：</span>
               <div>
-                <input type="text" name="" />
+                 <InputNumber size="large" placeholder="" style={{width:240,height:40}} />
                 <small>元</small>
               </div>
               <font>面值只能是数值，0.01-10000，限2位小数</font>
             </li>
             <li>
-              <span><b>* </b>每人限领：</span>
+              <span className={styles.sp}><b>* </b>每人限领：</span>
               <small>1张</small>
             </li>
             <li>
-              <span>使用门槛：</span>
-              <label>
-                <input type="radio" className="radiox" checked="" name="menkan" /><i className="radioshow fa fa-circle-o"></i>
-                无限制
-              </label>
-              <label>
-                <input type="radio" className="radiox" checked="" name="menkan" /><i className="radioshow fa fa-circle-o"></i>
-              </label>
-              <small>满</small>
-              <input type="text" className="mprice" name="" />
-              <small>可用</small>
+              <span className={styles.sp}>使用门槛：</span>
+              <RadioGroup onChange={this.onChange} value={this.state.value}>
+                <Radio value={1}>无限制</Radio>
+                <Radio value={2}>
+                  满
+                  <InputNumber size="large" style={{ width: 80, marginLeft: 10,marginRight:10 }} /> 
+                  元可用
+                </Radio>
+              </RadioGroup>
             </li>
             <li>
-              <span><b>* </b>有效期：</span>
+              <span className={styles.sp}><b>* </b>有效期：</span>
               <div className="daterang">
-                <label>
-                  <input type="radio" className="radiox" name="date" /><i className="radioshow fa fa-circle-o"></i>
-                  日期范围
-                </label>
-                <div><input type="text" placeholder="请选择日期" name="" /><i className="fa fa-calendar"></i></div>
-              </div>
-              <div className="datefixed">
-                <label>
-                  <input type="radio" className="radiox" checked="" name="date" /><i className="radioshow fa fa-circle-o"></i>
-                  固定天数
-                </label>
-                <div><input type="text" placeholder="领取后到期天数" name="" /><small>天</small></div>
+                <RadioGroup onChange={this.onChange2} value={this.state.value2}>
+                  <Radio value={1}>
+                    日期范围
+                    <RangePicker size="large" style={{ width: 240, marginLeft: 10 }} onChange={this.onChanged} />
+                  </Radio>
+                  <br/>
+                  <Radio value={2}>
+                    固定天数
+                    <InputNumber size="large" style={{ width: 240, marginLeft: 10 ,marginTop:10}} /> 
+                  </Radio>
+                 </RadioGroup>
+                  
               </div>
             </li>
             <li>
-              <span>可使用商品：</span>
-              <label>
-                <input type="radio" className="radiox" checked="" name="kind" /><i className="radioshow fa fa-circle-o"></i>
-                全场通用
-              </label>
-              <label>
-                <input type="radio" className="radiox" name="kind" /><i className="radioshow fa fa-circle-o"></i>
-                制定分类
-              </label>
+              <span className={styles.sp}>可使用商品：</span>
+              <RadioGroup onChange={this.onChange3} value={this.state.value3}>
+                  <Radio value={1}>全场通用</Radio>
+                  <Radio value={2}>制定分类</Radio>
+                 </RadioGroup>
             </li>
           </ul>
-          <div className={styles.appoint}>
-              <span><b>* </b>添加商品：</span>
-              <div className={styles.addsel}>
-                <select>
-                  <option>请选择分类</option>
-                  <option>服装>内衣</option>
-                  <option>服装>裤子</option>
-                  <option>服装>裙子</option>
-                  <option>服装>围巾</option>
-                  <option>服装>外套</option>
-                </select>
-                <small><i className="fa fa-plus"></i></small>
-              </div>
-              <font>购买以下分类商品可使用优惠券抵扣金额  已选中<b>13</b>个分类</font>
-              <table width="460" className="litable" style={{marginLeft:"400px"}}>
-                <tr>
-                  <th>分类名称</th>
-                  <th width="78">操作</th>
-                </tr>
-                <tr>
-                  <td>服装>内衣</td>
-                  <td className="operat"><a>删除</a></td>
-                </tr>
-              </table>
-              <ul className="left flypag" style={{marginLeft:"588px"}}>
-                <li><a>left</a></li>
-                <li><a className="active">1</a></li>
-                <li><a>2</a></li>
-                <li><a>3</a></li>
-                <li><a>4</a></li>
-                <li><a>5</a></li>
-                <li><a>...</a></li>
-                <li><a>10</a></li>
-                <li><a>right</a></li>
-              </ul>
-          </div>
+          {this.state.value3===2?<Addfl/>:null}
           <div className={styles.remarks}>
-            <span>备注：</span>
+            <span className={styles.sp}>备注：</span>
             <textarea placeholder="请输入内容"></textarea>
           </div>
           <a className={styles.upbtn}>提交</a>

@@ -1,6 +1,7 @@
 import React,{PureComponent} from 'react'
 import { Button, Table , Divider ,Switch , Select} from 'antd'
 import Header from '../../components/Card'
+import router from 'umi/router'
 //import styles from './accountset.less'
 
 import { connect } from 'dva'
@@ -144,9 +145,9 @@ export default class Activitylist extends PureComponent{
         <span>
           <a href="javascript:;">查看</a>
           <Divider type="vertical" />
-          <a href="javascript:;">编辑</a>
+          <a href="javascript:;" onClick={()=>{router.push('/promotion/activityadd')}}>编辑</a>
           <Divider type="vertical" />
-          <a href="javascript:;">发布到广告</a>
+          <a href="javascript:;" onClick={()=>{router.push('/operate/advertadd')}}>发布到广告</a>
           <Divider type="vertical" />
           <a href="javascript:;">删除</a>
         </span>
@@ -168,21 +169,8 @@ const rowSelection = {
       <div className="tablebox">
         <div>
           <div className="table-operations" style={{textAlign:'right',paddingBottom:'20px'}}>
-            <Button onClick={this.setAgeSort}>添加活动</Button>
-            <Select
-              showSearch
-              style={{ width: 100,marginLeft:10}}
-              placeholder="显示条数"
-              optionFilterProp="children"
-              onChange={this.selhandleChange}
-              onFocus={this.selhandleFocus}
-              onBlur={this.selhandleBlur}
-              filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
-            >
-              <Option value="30">30</Option>
-              <Option value="40">40</Option>
-              <Option value="50">50</Option>
-            </Select>
+            <Button  onClick={()=>{router.push('/promotion/activityadd')}}>添加活动</Button>
+            
             <Select
               showSearch
               style={{ width: 100,marginLeft:10}}
@@ -200,6 +188,14 @@ const rowSelection = {
               bordered={true}
               title={()=>('数据列表')}
               loading={false}
+              pagination={{ 
+                  showQuickJumper:true,
+                  showSizeChanger:true,
+                  total:100,
+                  showTotal: function () {  
+                      return '共 ' + 100 + ' 条数据'; 
+                  }
+                 }}
               rowSelection={rowSelection}
               position={'center'} 
               columns={columns} 

@@ -1,5 +1,7 @@
 import React,{PureComponent} from 'react'
 import { Button, } from 'antd'
+import Header from '../../components/Card'
+import styles from './awardset.css'
 //import styles from './accountset.less'
 
 import { connect } from 'dva'
@@ -9,23 +11,18 @@ export default class Accountset extends PureComponent{
   render(){
     return (
       <div className="content">
-        <div className="con-title">
-          <div className="titlesec">
-            <span className="left">对账单详情</span>
-            <a className="right reback">返回</a>
-          </div>
-        </div>
+        <Header>对账单详情</Header>
         <div className="tablebox">
-          <div className="asetbox">
+          <div className={styles.asetbox}>
             <div className="tip-title">
-              <span>对账单信息</span>
+              <span style={{marginLeft:20}}>对账单信息</span>
             </div>
-            <div className="neptitle">
+            <div className={styles.neptitle}>
               <i className="fa fa-bookmark"></i>
               <span>订单信息</span>
 
             </div>
-            <dl className="nepdl">
+            <dl className={styles.nepdl}>
               <dt>订单编号</dt>
               <dd>
                 <span>201707196398345</span>
@@ -48,19 +45,19 @@ export default class Accountset extends PureComponent{
               </dd>
 
             </dl>
-            <div className="neptitle">
+            <div className={styles.neptitle}>
               <i className="fa fa-bookmark"></i>
               <span>对账信息</span>
 
             </div>
-            <dl className="nepdl">
+            <dl className={styles.nepdl}>
               <dt>对账状态</dt>
               <dd>
                 <span>未对账</span>
               </dd>
 
             </dl>
-            <a className="upbtn">完成对账</a>
+            <a className={styles.upbtn}>完成对账</a>
           </div>
         </div>
       </div>

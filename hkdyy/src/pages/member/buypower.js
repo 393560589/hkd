@@ -1,15 +1,120 @@
 import React,{PureComponent} from 'react'
-import { Button, } from 'antd'
+import { Button, Radio, Table , Divider , Select, Modal,Input,Checkbox} from 'antd'
 import styles from './index.less'
-import {Card} from '../../components/Card'
+import Header from '../../components/Card'
+import Shortmsg from '../../components/Shortmsg/Shortmsg'
+import Systemsg from '../../components/systemsg'
+import Setag from '../../components/setag'
+import Appmsg from '../../components/Appmsg'
+import Coupon from '../../components/coupon'
 import { connect } from 'dva'
+import router from 'umi/router'
+const data = [{
+  key: '1',
+  number:'8848',
+  account:'15154554846',
+  grade: '黄金会员',
+  cost: '¥2000.00',
+  costnumber: '10',
+  avarge:'¥200.00',
+  time:'2017-07-03 14:36:21',
+}, {
+  key: '2',
+  number:'8848',
+  account:'15154554846',
+  grade: '黄金会员',
+  cost: '¥2000.00',
+  costnumber: '10',
+  avarge:'¥200.00',
+  time:'2017-07-03 14:36:21',
+}];
+
+
+const Option = Select.Option;
+const RadioButton = Radio.Button;
+const RadioGroup = Radio.Group;
 @connect(({index})=>({index}))
 
 export default class Accountset extends PureComponent{
+  constructor(props) {
+    super(props);
+    this.state = {
+      filteredInfo: null,
+      sortedInfo: null,
+    }
+    this.handleChange=this.handleChange.bind(this);
+   
+  }
+
+  handleChange(pagination, filters, sorter){
+    console.log('Various parameters', pagination, filters, sorter);
+    this.setState({
+      filteredInfo: filters,
+      sortedInfo: sorter,
+    });
+  }
+
+
   render(){
+
+    let { sortedInfo, filteredInfo } = this.state;
+    sortedInfo = sortedInfo || {};
+    filteredInfo = filteredInfo || {};
+    const columns = [{
+      title: '用户ID',
+      dataIndex: 'number',
+      key: 'number',
+    }, {
+      title: '用户账号',
+      dataIndex: 'account',
+      key: 'account',
+    }, {
+      title: '会员等级',
+      dataIndex: 'grade',
+      key: 'grade',
+    },
+    {
+      title:'消费金额',
+      dataIndex:'cost',
+      key:'cost'
+    },
+    {
+      title:'消费次数',
+      dataIndex:'costnumber',
+      key:'costnumber',
+    },
+    {
+      title:'订单均价',
+      dataIndex:'avarge',
+      key:'avarge',
+    },
+     {
+      title:'最近购买时间',
+      dataIndex:'time',
+      key:'time',
+    },
+    {
+      title:'操作',
+      dataIndex:'action',
+      key:'action',
+      render: (text, record) => (
+        <span>
+          <a href="javascript:;" onClick={()=>{router.push('/member/memberman')}}>查看</a>
+        </span>
+      )
+    }];
+const rowSelection = {
+  onChange: (selectedRowKeys, selectedRows) => {
+    console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+  },
+  getCheckboxProps: record => ({
+    disabled: record.name === 'Disabled User', // Column configuration not to be checked
+    name: record.name,
+  }),
+};
     return (
       <div className="content">
-        <Card>购买力筛选</Card>
+        <Header>购买力筛选</Header>
         <div className="tablebox">
           <div className={styles.screenbox}>
             <div className="tip-title">
@@ -18,237 +123,158 @@ export default class Accountset extends PureComponent{
               <div className="right">
                 <i className="tip2 fa fa-angle-up"></i>
                 <span>收起筛选</span>
-                <a>查询结果</a>
+                <Button style={{marginTop:8,textAlign:'center'}} onClick={this.setAgeSort}>查询结果</Button>
               </div>
             </div>
             <div className={styles.screenlist}>
-              <dl>
-                <dt>最近消费：</dt>
-                <dd>
-                  <ul>
-                    <li><a className="active">不限</a></li>
-                    <li><a>1周内</a></li>
-                    <li><a>2周内</a></li>
-                    <li><a>1个月内</a></li>
-                    <li><a>1个月前</a></li>
-                    <li><a>2个月前</a></li>
-                    <li><a>3个月前</a></li>
-                    <li><a>6个月前</a></li>
-                    <li><span>自定义</span></li>
-                  </ul>
-                </dd>
-              </dl>
-              <dl>
-                <dt>消费次数：</dt>
-                <dd>
-                  <ul>
-                    <li><a className="active">不限</a></li>
-                    <li><a>1次+</a></li>
-                    <li><a>2次+</a></li>
-                    <li><a>3次+</a></li>
-                    <li><a>4次+</a></li>
-                    <li><a>10次+</a></li>
-                    <li><a>20次+</a></li>
-                    <li><a>30次+</a></li>
-                    <li><span>自定义</span></li>
-                  </ul>
-                </dd>
-              </dl>
-              <dl>
-                <dt>消费金额：</dt>
-                <dd>
-                  <ul>
-                    <li><a className="active">不限</a></li>
-                    <li><a>0-50</a></li>
-                    <li><a>51-100</a></li>
-                    <li><a>101-150</a></li>
-                    <li><a>151-200</a></li>
-                    <li><a>201-300</a></li>
-                    <li><a>301-500</a></li>
-                    <li><a>501-1000</a></li>
-                    <li><span>自定义</span></li>
-                  </ul>
-                </dd>
-              </dl>
-              <dl>
-                <dt>订单均价：</dt>
-                <dd>
-                  <ul>
-                    <li><a className="active">不限</a></li>
-                    <li><a>0-20</a></li>
-                    <li><a>21-50</a></li>
-                    <li><a>51-100</a></li>
-                    <li><a>101-150</a></li>
-                    <li><a>151-200</a></li>
-                    <li><a>201-300</a></li>
-                    <li><a>301-500</a></li>
-                    <li><span>自定义</span></li>
-                  </ul>
-                </dd>
-              </dl>
-              <dl>
-                <dt>商品分类：</dt>
-                <dd>
-                  <ul>
-                    <li><a className="active">不限</a></li>
-                    <li><a>服装</a></li>
-                    <li><a>餐厨</a></li>
-                    <li><a>配件</a></li>
-                    <li><a>居家</a></li>
-                    <li><a>洗护</a></li>
-                    <li><a>婴童</a></li>
-                    <li><a>杂货</a></li>
-                    <li><a>饮食</a></li>
-                    <li><a>志趣</a></li>
-                  </ul>
-                </dd>
-              </dl>
-              <dl>
-                <dt>会员等级：</dt>
-                <dd>
-                  <ul>
-                    <li><a className="active">不限</a></li>
-                    <li><a>普通会员</a></li>
-                    <li><a>黄金会员</a></li>
-                    <li><a>白金会员</a></li>
-                    <li><a>钻石会员</a></li>
-                  </ul>
-                </dd>
-              </dl>
-              <dl>
-                <dt>用户标签：</dt>
-                <dd>
-                  <ul>
-                    <li><a className="active">不限</a></li>
-                    <li><a>标签名称</a></li>
-                    <li><a>标签名称</a></li>
-                    <li><a>标签名称</a></li>
-                    <li><a>标签名称</a></li>
-                    <li><a>标签名称</a></li>
-                    <li><a>标签名称</a></li>
-                    <li><a>标签名称</a></li>
-                    <li><a>标签名称</a></li>
-                    <li><a>标签名称</a></li>
-                    <li><a>标签名称</a></li>
-                    <li><a>标签名称</a></li>
-                    <li><a>标签名称</a></li>
-                    <li><a>标签名称</a></li>
-                    <li><a>标签名称</a></li>
-                  </ul>
-                </dd>
-                <dd className="more"><span>更多</span><i className="fa fa-angle-down"></i></dd>
-              </dl>
-            </div>
-          </div>
-          <div className="datalist">
-            <div className="tip-title">
-              <i className="tip1 left fa fa-list-ul"></i>
-              <span className="left">数据列表</span>
-              <div className="right">
-                <select>
-                  <option value="" disabled selected hidden>群发短信</option>
-                  <option value="">选中用户</option>
-                  <option value="">全部用户</option>
-                </select>
-                <select>
-                  <option value="" disabled selected hidden>群发站内信</option>
-                  <option value="">选中用户</option>
-                  <option value="">全部用户</option>
-                </select>
-                <select>
-                  <option value="" disabled selected hidden>APP推送</option>
-                  <option value="">选中用户</option>
-                  <option value="">全部用户</option>
-                </select>
-                <select>
-                  <option value="" disabled selected hidden>设置标签</option>
-                  <option value="">选中用户</option>
-                  <option value="">全部用户</option>
-                </select>
-                <select>
-                  <option value="" disabled selected hidden>赠送优惠券</option>
-                  <option value="">选中用户</option>
-                  <option value="">全部用户</option>
-                </select>
-                <select>
-                  <option value="" disabled selected hidden>导出数据</option>
-                  <option value="">选中用户</option>
-                  <option value="">全部用户</option>
-                </select>
-                <select disabled="disabled">
-                  <option value="" disabled selected hidden>显示条数</option>
-                  <option value="">20</option>
-                  <option value="">30</option>
-                  <option value="">40</option>
-                </select>
-                <select disabled="disabled">
-                  <option value="" disabled selected hidden>排序方式</option>
-                </select>
+              <div className="radioborder">
+                <span className={styles.sp}>最近消费：</span>
+                <RadioGroup onChange={this.onChange} defaultValue="a">
+                  <RadioButton value="a">不限</RadioButton>
+                  <RadioButton value="b">1周内</RadioButton>
+                  <RadioButton value="c">2周内</RadioButton>
+                  <RadioButton value="d">1个月内</RadioButton>
+                  <RadioButton value="e">1个月前</RadioButton>
+                  <RadioButton value="f">2个月前</RadioButton>
+                  <RadioButton value="g">3个月前</RadioButton>
+                  <RadioButton value="h">6个月前</RadioButton>
+                  <RadioButton value="i">自定义</RadioButton>
+                </RadioGroup>
               </div>
-            </div>
-            <table width="100%" className="litable">
-              <tr>
-                <th><input type="checkbox" className="choice" name=""/><i
-                  className="choiceshow allchoice fa fa-square-o"></i></th>
-                <th>用户ID</th>
-                <th>用户账号</th>
-                <th>会员等级</th>
-                <th>消费金额</th>
-                <th>消费次数</th>
-                <th>订单均价</th>
-                <th>最近购买时间</th>
-                <th>操作</th>
-              </tr>
-              <tr>
-                <td><input type="checkbox" className="choice" name=""/><i className="choiceshow fa fa-square-o"></i></td>
-                <td>8848</td>
-                <td>15154554846</td>
-                <td>黄金会员</td>
-                <td>¥2000.00</td>
-                <td>10</td>
-                <td>¥200.00</td>
-                <td>2017-07-03 14:36:21</td>
-                <td className="operat"><a href="../menber/menberman.html">查看</a></td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" className="choice" name=""/><i className="choiceshow fa fa-square-o"></i></td>
-                <td>8848</td>
-                <td>15154554846</td>
-                <td>黄金会员</td>
-                <td>¥2000.00</td>
-                <td>10</td>
-                <td>¥200.00</td>
-                <td>2017-07-03 14:36:21</td>
-                <td className="operat"><a>查看</a></td>
-              </tr>
-            </table>
-            <div className="tip-botbox">
-              <div className="left">
-                <input type="checkbox" className="choice" name=""/><i
-                  className="choiceshow allchoice fa fa-square-o"></i>
-                  <span>全选</span>
+              <div className="radioborder">
+                <span className={styles.sp}>消费次数：</span>
+                <RadioGroup onChange={this.onChange} defaultValue="a">
+                  <RadioButton value="a">不限</RadioButton>
+                  <RadioButton value="b">1次+</RadioButton>
+                  <RadioButton value="c">2次+</RadioButton>
+                  <RadioButton value="d">3次+</RadioButton>
+                  <RadioButton value="e">4次+</RadioButton>
+                  <RadioButton value="f">10次+</RadioButton>
+                  <RadioButton value="g">20次+</RadioButton>
+                  <RadioButton value="h">30次+</RadioButton>
+                  <RadioButton value="i">自定义</RadioButton>
+                </RadioGroup>
               </div>
-              <div className="right">
-                <span className="left">共<font>10</font>页/<font>100</font>条数据</span>
-                <ul className="left flypag">
-                  <li><a>
-                    1
-                  </a></li>
-                  <li><a className="active">1</a></li>
-                  <li><a>2</a></li>
-                  <li><a>3</a></li>
-                  <li><a>4</a></li>
-                  <li><a>5</a></li>
-                  <li><a>...</a></li>
-                  <li><a>10</a></li>
-                  <li><a>></a></li>
-                </ul>
-                <div className="left">
-                  跳至<input type="text" className="tiz" value="1"/>页
-                </div>
+              <div className="radioborder">
+                <span className={styles.sp}>消费金额：</span>
+                <RadioGroup onChange={this.onChange} defaultValue="a">
+                  <RadioButton value="a">不限</RadioButton>
+                  <RadioButton value="b">0-50</RadioButton>
+                  <RadioButton value="c">51-100</RadioButton>
+                  <RadioButton value="d">101-150</RadioButton>
+                  <RadioButton value="e">151-200</RadioButton>
+                  <RadioButton value="f">201-300</RadioButton>
+                  <RadioButton value="g">301-500</RadioButton>
+                  <RadioButton value="h">501-1000</RadioButton>
+                  <RadioButton value="i">自定义</RadioButton>
+                </RadioGroup>
+              </div>
+              <div className="radioborder">
+                <span className={styles.sp}>订单均价：</span>
+                <RadioGroup onChange={this.onChange} defaultValue="a">
+                  <RadioButton value="a">不限</RadioButton>
+                  <RadioButton value="b">0-20</RadioButton>
+                  <RadioButton value="c">21-50</RadioButton>
+                  <RadioButton value="d">51-100</RadioButton>
+                  <RadioButton value="e">101-150</RadioButton>
+                  <RadioButton value="f">151-200</RadioButton>
+                  <RadioButton value="g">201-300</RadioButton>
+                  <RadioButton value="h">301-500</RadioButton>
+                  <RadioButton value="i">自定义</RadioButton>
+                </RadioGroup>
+              </div>
+              <div className="radioborder">
+                <span className={styles.sp}>商品分类：</span>
+                <RadioGroup onChange={this.onChange} defaultValue="a">
+                  <RadioButton value="a">不限</RadioButton>
+                  <RadioButton value="b">服装</RadioButton>
+                  <RadioButton value="c">餐厨</RadioButton>
+                  <RadioButton value="d">配件</RadioButton>
+                  <RadioButton value="e">居家</RadioButton>
+                  <RadioButton value="f">洗护</RadioButton>
+                  <RadioButton value="g">婴童</RadioButton>
+                  <RadioButton value="h">杂货</RadioButton>
+                  <RadioButton value="i">饮食</RadioButton>
+                </RadioGroup>
+              </div>
+              <div className="radioborder">
+                <span className={styles.sp}>会员等级：</span>
+                <RadioGroup onChange={this.onChange} defaultValue="a">
+                  <RadioButton value="a">不限</RadioButton>
+                  <RadioButton value="b">普通会员</RadioButton>
+                  <RadioButton value="c">黄金会员</RadioButton>
+                  <RadioButton value="d">白金会员</RadioButton>
+                  <RadioButton value="e">钻石会员</RadioButton>
+                  
+                </RadioGroup>
+              </div>
+              <div className="radioborder">
+                <span className={styles.sp}>用户标签：</span>
+                <RadioGroup onChange={this.onChange} defaultValue="a">
+                  <RadioButton value="a">标签名称</RadioButton>
+                  <RadioButton value="b">标签名称</RadioButton>
+                  <RadioButton value="c">标签名称</RadioButton>
+                  <RadioButton value="d">标签名称</RadioButton>
+                  <RadioButton value="e">标签名称</RadioButton>
+                  <RadioButton value="f">标签名称</RadioButton>
+                  <RadioButton value="g">标签名称</RadioButton>
+                  <RadioButton value="h">标签名称</RadioButton>
+                  <RadioButton value="i">更多</RadioButton>
+                </RadioGroup>
               </div>
             </div>
           </div>
+          <div style={{marginTop:20}}>
+            <div className="table-operations" style={{textAlign:'right',paddingBottom:'20px'}}>
+              <Shortmsg/>
+              <Systemsg/>
+              <Appmsg/>
+              <Setag/>
+              <Coupon/>
+               <Select
+                showSearch
+                style={{ width: 100,marginLeft:10}}
+                placeholder="导出数据"
+                optionFilterProp="children"
+                onChange={this.selhandleChange}
+                onFocus={this.selhandleFocus}
+                onBlur={this.selhandleBlur}
+                filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+              >
+                <Option value="30">选中用户</Option>
+                <Option value="40">全部用户</Option>
+              </Select>
+              <Select
+                showSearch
+                style={{ width: 100,marginLeft:10}}
+                placeholder="排序方式"
+                optionFilterProp="children"
+                onChange={this.selhandleChange}
+                onFocus={this.selhandleFocus}
+                onBlur={this.selhandleBlur}
+                filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+              >
+                <Option value="时间">时间</Option>
+              </Select>
+            </div>
+            <Table 
+                bordered={true}
+                title={()=>('数据列表')}
+                loading={false}
+                rowSelection={rowSelection}
+                pagination={{ 
+                    showQuickJumper:true,
+                    showSizeChanger:true,
+                    total:100,
+                    showTotal: function () {  
+                        return '共 ' + 100 + ' 条数据'; 
+                    }
+                   }}
+                position={'center'} 
+                columns={columns} 
+                dataSource={data} 
+                onChange={this.handleChange} />
+            </div>
         </div>
       </div>
 

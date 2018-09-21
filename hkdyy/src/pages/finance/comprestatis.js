@@ -1,43 +1,38 @@
 import React,{PureComponent} from 'react'
-import { Button, } from 'antd'
-//import styles from './accountset.less'
+import { Button, Radio,DatePicker} from 'antd'
+import Header from '../../components/Card'
+import styles from './awardset.css'
 
 import { connect } from 'dva'
+
+const { RangePicker } = DatePicker;
 @connect(({index})=>({index}))
 
 export default class Accountset extends PureComponent{
   render(){
     return (
       <div className="content">
-        <div className="con-title">
-          <div className="titlesec">
-            <span className="left">综合统计</span>
-            <a className="right refresh">刷新</a>
-          </div>
-        </div>
+        <Header>综合统计</Header>
         <div className="tablebox">
-          <div className="asetbox statisbox">
+          <div className={styles.asetbox,styles.statisbox}>
             <div className="tip-title">
-              <span>综合统计</span>
+              <span style={{marginLeft:20}}>综合统计</span>
               <div className="right">
-                <a>导出数据</a>
-                <div className="ass left">
-                  <a className="active">全部</a>
-                  <a>最近30天</a>
-                  <a>最近90天</a>
-                </div>
-                <div className="datad left">
-                  <input type="text" name=""/>
-                    <i className="fa fa-calendar"></i>
-                </div>
+                <Button>导出数据</Button>
+                <Radio.Group defaultValue="a" buttonStyle="solid" style={{marginLeft:10}}>
+                  <Radio.Button value="a">全部</Radio.Button>
+                  <Radio.Button value="b">最近30天</Radio.Button>
+                  <Radio.Button value="c">最近90天</Radio.Button>
+                </Radio.Group>
+                <RangePicker onChange={this.onChange} style={{marginLeft:10}} />
               </div>
             </div>
-            <div className="neptitle">
+            <div className={styles.neptitle}>
               <i className="fa fa-bookmark"></i>
               <span>订单统计</span>
 
             </div>
-            <dl className="nepdt">
+            <dl className={styles.nepdt}>
               <dt>销售总额</dt>
               <dd>
                 ¥1000000.00
@@ -67,12 +62,12 @@ export default class Accountset extends PureComponent{
                 ¥1000000.00
               </dd>
             </dl>
-            <div className="neptitle">
+            <div className={styles.neptitle}>
               <i className="fa fa-bookmark"></i>
               <span>会员统计</span>
 
             </div>
-            <dl className="nepdt">
+            <dl className={styles.nepdt}>
               <dt>会员总数</dt>
               <dd>
                 100000
@@ -102,12 +97,12 @@ export default class Accountset extends PureComponent{
                 ¥100.00
               </dd>
             </dl>
-            <div className="neptitle">
+            <div className={styles.neptitle}>
               <i className="fa fa-bookmark"></i>
               <span>积分统计</span>
 
             </div>
-            <dl className="nepdt">
+            <dl className={styles.nepdt}>
               <dt>总赠送消费积分(优币)</dt>
               <dd>
                 100000

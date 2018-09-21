@@ -1,71 +1,77 @@
 import React,{PureComponent} from 'react'
-import { Button, } from 'antd'
+import { Button,Table } from 'antd'
+import Header from '../../components/Card'
 //import styles from './accountset.less'
 
 import { connect } from 'dva'
+
+const data = [{
+  key: '1',
+  time:'2017-07-03 14:36:21',
+  ip:'183.14.135.1',
+  address: '广东省深圳市',
+  browser:'Firefox 45',
+}, {
+  key: '2',
+  time:'2017-07-03 14:36:21',
+  ip:'183.14.135.1',
+  address: '广东省深圳市',
+  browser:'Firefox 45',
+}];
 @connect(({index})=>({index}))
 
 export default class Accountset extends PureComponent{
+  state = {
+    filteredInfo: null,
+    sortedInfo: null,
+  }
+
+  handleChange = (pagination, filters, sorter) => {
+    console.log('Various parameters', pagination, filters, sorter);
+    this.setState({
+      filteredInfo: filters,
+      sortedInfo: sorter,
+    });
+  }
   render(){
+     let { sortedInfo, filteredInfo } = this.state;
+    sortedInfo = sortedInfo || {};
+    filteredInfo = filteredInfo || {};
+    const columns = [{
+      title: '时间',
+      dataIndex: 'time',
+      key: 'time',
+    }, {
+      title: 'IP',
+      dataIndex: 'ip',
+      key: 'ip',
+    }, {
+      title: '地区',
+      dataIndex: 'address',
+      key: 'address',
+    },
+     {
+      title: '浏览器',
+      dataIndex: 'browser',
+      key: 'browser',
+    }];
     return (
       <div className="content">
-        <div className="con-title">
-          <div className="titlesec">
-            <a className="left" href="../menber/menberman.html">用户详情</a>
-            <a className="left" href="../menber/menberedit.html">编辑资料</a>
-            <a className="left active" href="../menber/menloginlog.html">登录日志</a>
-            <a className="right reback">返回</a>
-            <a className="right refresh">刷新</a>
-          </div>
-        </div>
+        <Header>登录日志</Header>
         <div className="tablebox">
-          <div className="logbox">
-            <div className="tip-title">
-              <i className="tip1 left fa fa-list-ul"></i>
-              <span className="left">数据列表</span>
+          <div style={{marginTop:20}}>
+            
+            <Table 
+                bordered={true}
+                title={()=>('数据列表')}
+               
+                loading={false}
+                
+                position={'center'} 
+                columns={columns} 
+                dataSource={data} 
+                onChange={this.handleChange} />
             </div>
-            <table width="100%" className="litable">
-              <tr>
-                <th>时间</th>
-                <th>IP</th>
-                <th>地区</th>
-                <th>浏览器</th>
-              </tr>
-              <tr>
-                <td>2017-07-03 14:36:21</td>
-                <td>183.14.135.1</td>
-                <td>广东省深圳市</td>
-                <td>Firefox 45</td>
-              </tr>
-              <tr>
-                <td>2017-07-03 14:36:21</td>
-                <td>183.14.135.1</td>
-                <td>广东省深圳市</td>
-                <td>Firefox 45</td>
-              </tr>
-            </table>
-            <div className="tip-botbox">
-              <div className="right">
-                <span className="left">共<font>10</font>页/<font>100</font>条数据</span>
-                <ul className="left flypag">
-                  <li><a>
-                   1
-                  </a></li>
-                  <li><a className="active">1</a></li>
-                  <li><a>2</a></li>
-                  <li><a>3</a></li>
-                  <li><a>4</a></li>
-                  <li><a>5</a></li>
-                  <li><a>...</a></li>
-                  <li><a>10</a></li>
-                  <li><a>></a></li>
-                </ul>
-                <div className="left">
-                  跳至<input type="text" className="tiz" value="1"/>页
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
 

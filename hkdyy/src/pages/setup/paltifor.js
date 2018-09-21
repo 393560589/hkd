@@ -1,5 +1,5 @@
 import React,{PureComponent} from 'react'
-import { Button, } from 'antd'
+import { Button, Input, Upload, Icon } from 'antd'
 import Header from '../../components/Card'
 import styles from './activity.css'
 
@@ -8,6 +8,13 @@ import { connect } from 'dva'
 
 export default class Paltifor extends PureComponent{
   render(){
+    const fileList = [];
+    const props2 = {
+      action: '//jsonplaceholder.typicode.com/posts/',
+      listType: 'picture',
+      defaultFileList: [...fileList],
+      className: 'upload-list-inline',
+    };
     return (
      <div className="content">
      <Header>平台信息</Header>
@@ -18,36 +25,40 @@ export default class Paltifor extends PureComponent{
           </div> 
           <ul>
             <li>
-              <span><b>* </b>平台名称：</span>
-              <input type="text" className="alin" name="" />
+              <span className={styles.sp}><b>* </b>平台名称：</span>
+              <Input placeholder="" style={{width:220,height:40}} />
             </li>
             <li>
-              <span><b>* </b>平台标题：</span>
-              <input type="text" className="alin" name="" />
+              <span className={styles.sp}><b>* </b>平台标题：</span>
+              <Input placeholder="" style={{width:220,height:40}} />
             </li>
             <li>
-              <span><b>* </b>平台描述：</span>
-              <input type="text" className="alin" name="" />
+              <span className={styles.sp}><b>* </b>平台描述：</span>
+              <Input placeholder="" style={{width:220,height:40}} />
             </li>
             <li>
-              <span><b>* </b>关键词：</span>
-              <input type="text" className="alin" name="" />
+              <span className={styles.sp}><b>* </b>关键词：</span>
+              <Input placeholder="" style={{width:220,height:40}} />
             </li>
             <li>
-              <span><b>* </b>平台LOGO：</span>
-              <input type="file" name="" />
+              <span className={styles.sp}><b>* </b>平台LOGO：</span>
+              <Upload {...props2}>
+                  <Button>
+                    <Icon type="upload" /> Upload
+                  </Button>
+              </Upload>
               <font>只能上传jpg/png格式文件，文件不能超过50kb</font>
             </li>
             <li>
-              <span><b>* </b>客服热线：</span>
-              <input type="text" className="alin" name="" />
+              <span className={styles.sp}><b>* </b>客服热线：</span>
+              <Input placeholder="" style={{width:220,height:40}} />
             </li>
             <li>
-              <span><b>* </b>客服邮箱：</span>
-              <input type="text" className="alin" name="" />
+              <span className={styles.sp}><b>* </b>客服邮箱：</span>
+              <Input placeholder="" style={{width:220,height:40}} />
             </li>
             <li>
-              <span>简介：</span>
+              <span className={styles.sp}>简介：</span>
               <textarea placeholder="请输入内容"></textarea>
               <font>该信息将在用户中心欢迎页面显示</font>
             </li>

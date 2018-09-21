@@ -1,6 +1,8 @@
 import React,{PureComponent} from 'react'
 import { Button, Table , Divider ,Switch , Select ,Input} from 'antd'
 import Header from '../../components/Card'
+import Addactivity from '../../components/addactivity'
+import router from 'umi/router'
 //import styles from './accountset.less'
 
 import { connect } from 'dva'
@@ -29,21 +31,34 @@ const Option = Select.Option;
 @connect(({index})=>({index}))
 
 export default class Seckillactivity extends PureComponent{
+constructor(props) {
+      super(props);
+      this.state = {
+       filteredInfo: null,
+       sortedInfo: null,
+      }
+      this.handleChange=this.handleChange.bind(this);
+      this.editonClick=this.editonClick.bind(this);
+    }
 
-   state = {
-    filteredInfo: null,
-    sortedInfo: null,
-  };
-
-  handleChange = (pagination, filters, sorter) => {
+  handleChange(pagination, filters, sorter){
     console.log('Various parameters', pagination, filters, sorter);
     this.setState({
       filteredInfo: filters,
       sortedInfo: sorter,
     });
   }
+  editonClick(){
+    const { dispatch }=this.props;
+    dispatch({
+      type:'index/save',
+      payload:{
+        addactvisible:true
+      }
+    })
+  }
 
-   selhandleChange(value) {
+  selhandleChange(value) {
   console.log(`selected ${value}`);
 }
 
@@ -121,9 +136,9 @@ export default class Seckillactivity extends PureComponent{
       key:'action',
       render: (text, record) => (
         <span>
-          <a href="javascript:;">设置商品</a>
+          <a href="javascript:;"  onClick={()=>{router.push('/promotion/setcom')}}>设置商品</a>
           <Divider type="vertical" />
-          <a href="javascript:;">编辑</a>
+          <a href="javascript:;" onClick={this.editonClick}>编辑</a>
           <Divider type="vertical" />
           <a href="javascript:;">删除</a>
         </span>
@@ -158,22 +173,9 @@ export default class Seckillactivity extends PureComponent{
           </div>
           <div style={{marginTop:40}}>
               <div className="table-operations" style={{textAlign:'right',paddingBottom:'20px'}}>
-                <Button onClick={this.setAgeSort}>添加活动</Button>
+                <Addactivity/>
                 <Button style={{marginLeft:10}} onClick={this.setAgeSort}>秒杀时间段列表</Button>
-                <Select
-                  showSearch
-                  style={{ width: 100,marginLeft:10}}
-                  placeholder="显示条数"
-                  optionFilterProp="children"
-                  onChange={this.selhandleChange}
-                  onFocus={this.selhandleFocus}
-                  onBlur={this.selhandleBlur}
-                  filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
-                >
-                  <Option value="30">30</Option>
-                  <Option value="40">40</Option>
-                  <Option value="50">50</Option>
-                </Select>
+                
                 <Select
                   showSearch
                   style={{ width: 100,marginLeft:10}}
@@ -191,7 +193,14 @@ export default class Seckillactivity extends PureComponent{
                   bordered={true}
                   title={()=>('数据列表')}
                   loading={false}
-        
+                  pagination={{ 
+                    showQuickJumper:true,
+                    showSizeChanger:true,
+                    total:100,
+                    showTotal: function () {  
+                        return '共 ' + 100 + ' 条数据'; 
+                    }
+                   }}
                   position={'center'} 
                   columns={columns} 
                   dataSource={data} 

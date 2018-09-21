@@ -1,9 +1,10 @@
 import React,{PureComponent} from 'react'
-import { Button, } from 'antd'
+import { Button,Input } from 'antd'
 import Header from '../../components/Card'
 import styles from './msgrem.css'
 
 import { connect } from 'dva'
+const { TextArea } = Input;
 @connect(({index})=>({index}))
 
 export default class Shortmsg extends PureComponent{
@@ -48,11 +49,11 @@ export default class Shortmsg extends PureComponent{
             </li>
             <li>
               <span className={styles.xti}><b>* </b>邮件内容：</span>
-              <textarea></textarea>
+              <TextArea rows={6} />
               <font>内容不能为空，长度限制在1-300个字符之间</font>
             </li>
           </ul>
-          <a className={styles.upbtn}>提交</a>
+          <Button className={styles.upbtn}>提交</Button>
         </div> 
      </div>
     </div>

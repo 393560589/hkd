@@ -1,5 +1,5 @@
 import React,{PureComponent} from 'react'
-import { Button, } from 'antd'
+import { Button,Input } from 'antd'
 import Header from '../../components/Card'
 import styles from './msgrem.css'
 
@@ -48,7 +48,7 @@ export default class Emailmsg extends PureComponent{
             </li>
             <li>
               <span className={styles.xti}><b>* </b>邮件标题：</span>
-              <input type="text" value="订单已提交成功" name="" />
+              <Input size="large" defaultValue="订单已提交成功" style={{width:350}} />
             </li>
             <li>
               <span className={styles.xti}><b>* </b>内容模板：</span>
@@ -56,7 +56,7 @@ export default class Emailmsg extends PureComponent{
               <font>邮件內容不能为空，长度限不能超过4000个字符</font>
             </li>
           </ul>
-          <a className={styles.upbtn}>提交</a>
+          <Button className={styles.upbtn}>提交</Button>
         </div> 
      </div>
     </div>

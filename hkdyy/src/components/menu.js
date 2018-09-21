@@ -57,7 +57,7 @@ export const menu = [
     key:'权限',
     path:'list-power',
     icon:require('../assets/u134.png'),
-    status:'power'
+    status:'pawer'
   },
 ];
 export const MenuChilren = [
@@ -118,7 +118,7 @@ export const MenuChilren = [
           route:'/member/labelgl'
         },
         {
-          key:'会员登记设置',
+          key:'会员等级设置',
           path:'grade',
           route:'/member/grade'
         },
@@ -442,22 +442,22 @@ export const MenuChilren = [
         {
           key:'部门管理',
           path:'department',
-          route:'/power/department'
+          route:'/pawer/department'
         },
         {
           key:'成员管理',
-          route:'/power/manage',
+          route:'/pawer/manage',
           path:'manage',
         },
         {
           key:'客服管理',
           path:'servicer',
-          route:'/power/servicer'
+          route:'/pawer/servicer'
         },
         {
           key:'操作日志',
           path:'operlog',
-          route:'/power/operlog'
+          route:'/pawer/operlog'
         },
         /*{
           key:'数据库管理',

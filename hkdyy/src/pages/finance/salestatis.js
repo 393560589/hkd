@@ -1,19 +1,93 @@
 import React,{PureComponent} from 'react'
-import { Button, } from 'antd'
+import { Button, Table, Select} from 'antd'
+import Header from '../../components/Card'
 //import styles from './accountset.less'
 
 import { connect } from 'dva'
+
+const data = [{
+  key: '1',
+  ordernum:'201707196398345',
+  name:'银色星芒刺绣网纱底裤',
+  goodsnum: 'No86577',
+  goods: '1',
+  orderprice:'¥2000.00',
+  state:'待付款',
+  gettime:'2017-07-03 14:36:21',
+  seltime:'2017-07-03 14:36:21'
+}, {
+  key: '2',
+  ordernum:'201707196398345',
+  name:'银色星芒刺绣网纱底裤',
+  goodsnum: 'No86577',
+  goods: '1',
+  orderprice:'¥2000.00',
+  state:'待付款',
+  gettime:'2017-07-03 14:36:21',
+  seltime:'2017-07-03 14:36:21'
+}];
+const Option = Select.Option;
 @connect(({index})=>({index}))
 
 export default class Accountset extends PureComponent{
+
+   state = {
+    filteredInfo: null,
+    sortedInfo: null,
+  }
+
+  handleChange = (pagination, filters, sorter) => {
+    console.log('Various parameters', pagination, filters, sorter);
+    this.setState({
+      filteredInfo: filters,
+      sortedInfo: sorter,
+    });
+  }
   render(){
+     let { sortedInfo, filteredInfo } = this.state;
+    sortedInfo = sortedInfo || {};
+    filteredInfo = filteredInfo || {};
+    const columns = [{
+      title: '订单号',
+      dataIndex: 'ordernum',
+      key: 'ordernu',
+    }, {
+      title: '商品名称',
+      dataIndex: 'name',
+      key: 'name',
+    }, {
+      title: '货号',
+      dataIndex: 'goodsnum',
+      key: 'goodsnum',
+    },
+    {
+      title:'商品数量',
+      dataIndex:'goods',
+      key:'goods'
+    },
+    {
+      title:'订单金额',
+      dataIndex:'orderprice',
+      key:'orderprice'
+    },
+    {
+      title:'订单状态',
+      dataIndex:'state',
+      key:'state'
+    },
+    {
+      title:'下单时间',
+      dataIndex:'gettime',
+      key:'gettime'
+    },
+    {
+      title:'发货时间',
+      dataIndex:'seltime',
+      key:'seltime'
+    }];
     return (
       <div className="content">
-        <div className="con-title">
-          <div className="titlesec">
-            <span className="left">销售统计</span>
-          </div>
-        </div>
+        <Header>销售统计</Header>
         <div className="tablebox">
           <div className="screen">
             <div className="tip-title">
@@ -55,68 +129,39 @@ export default class Accountset extends PureComponent{
                 </ul>
             </div>
           </div>
-          <div className="datalist">
-            <div className="tip-title">
-              <i className="tip1 left fa fa-list-ul"></i>
-              <span className="left">数据列表</span>
-              <div className="right">
-                <a>导出数据</a>
-                <select disabled="disabled">
-                  <option value="" disabled selected hidden>显示条数</option>
-                  <option value="">20</option>
-                  <option value="">30</option>
-                  <option value="">40</option>
-                </select>
-                <select disabled="disabled">
-                  <option value="" disabled selected hidden>排序方式</option>
-                </select>
-              </div>
+           <div style={{marginTop:20}}>
+            <div className="table-operations" style={{textAlign:'right',paddingBottom:'20px'}}>
+               <Button onClick={this.setAgeSort}>导出数据</Button>
+             
+              <Select
+                showSearch
+                style={{ width: 100,marginLeft:10}}
+                placeholder="排序方式"
+                optionFilterProp="children"
+                onChange={this.selhandleChange}
+                onFocus={this.selhandleFocus}
+                onBlur={this.selhandleBlur}
+                filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+              >
+                <Option value="时间">时间</Option>
+              </Select>
             </div>
-            <table width="100%" className="litable">
-              <tr>
-                <th>订单号</th>
-                <th>商品名称</th>
-                <th>货号</th>
-                <th>商品数量</th>
-                <th>订单金额</th>
-                <th>订单状态</th>
-                <th>下单时间</th>
-                <th>发货时间</th>
-              </tr>
-              <tr>
-                <td>201707196398345</td>
-                <td>银色星芒刺绣网纱底裤</td>
-                <td>No86577</td>
-                <td>1</td>
-                <td>¥2000.00</td>
-                <td>待付款</td>
-                <td>2017-07-03 14:36:21</td>
-                <td>2017-07-03 14:36:21</td>
-              </tr>
-            </table>
-            <div className="tip-botbox">
-
-              <div className="right">
-                <span className="left">共<font>10</font>页/<font>100</font>条数据</span>
-                <ul className="left flypag">
-                  <li><a>
-                    1
-                  </a></li>
-                  <li><a className="active">1</a></li>
-                  <li><a>2</a></li>
-                  <li><a>3</a></li>
-                  <li><a>4</a></li>
-                  <li><a>5</a></li>
-                  <li><a>...</a></li>
-                  <li><a>10</a></li>
-                  <li><a>></a></li>
-                </ul>
-                <div className="left">
-                  跳至<input type="text" className="tiz" value="1"/>页
-                </div>
-              </div>
-            </div>
-
+            <Table 
+                bordered={true}
+                title={()=>('数据列表')}
+                pagination={{ 
+                    showQuickJumper:true,
+                    showSizeChanger:true,
+                    total:100,
+                    showTotal: function () {  
+                        return '共 ' + 100 + ' 条数据'; 
+                    }
+                   }}
+                loading={false}
+                position={'center'} 
+                columns={columns} 
+                dataSource={data} 
+                onChange={this.handleChange} />
           </div>
         </div>
       </div>

@@ -192,20 +192,7 @@ const rowSelection = {
           </div>
           <div>
           <div className="table-operations" style={{textAlign:'right',paddingBottom:'20px'}}>
-            <Select
-              showSearch
-              style={{ width: 100,marginLeft:10}}
-              placeholder="显示条数"
-              optionFilterProp="children"
-              onChange={this.selhandleChange}
-              onFocus={this.selhandleFocus}
-              onBlur={this.selhandleBlur}
-              filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
-            >
-              <Option value="30">30</Option>
-              <Option value="40">40</Option>
-              <Option value="50">50</Option>
-            </Select>
+            
             <Select
               showSearch
               style={{ width: 100,marginLeft:10}}
@@ -223,6 +210,14 @@ const rowSelection = {
               bordered={true}
               title={()=>('数据列表')}
               loading={false}
+              pagination={{ 
+                  showQuickJumper:true,
+                  showSizeChanger:true,
+                  total:100,
+                  showTotal: function () {  
+                      return '共 ' + 100 + ' 条数据'; 
+                  }
+                 }}
               rowSelection={rowSelection}
               position={'center'} 
               columns={columns} 

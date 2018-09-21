@@ -1,6 +1,7 @@
 import React,{PureComponent} from 'react'
 import { Button, Table , Divider ,Switch , Select ,Input} from 'antd'
 import Header from '../../components/Card'
+import Factory from '../../components/factory'
 import styles from './recomrd.css'
 
 import { connect } from 'dva'
@@ -159,20 +160,20 @@ const rowSelection = {
 };
 
     return (
-     <div class="content">
+     <div className="content">
      <Header>厂家特惠</Header>
-     <div class="tablebox">
-        <div class="screen">
-          <div class="tip-title">
-            <i class="tip1 left fa fa-search"></i>
-            <span class="left">筛选查询</span>
-            <div class="right">
-              <i class="tip2 fa fa-angle-up"></i>
+     <div className="tablebox">
+        <div className="screen">
+          <div className="tip-title">
+            <i className="tip1 left fa fa-search"></i>
+            <span className="left">筛选查询</span>
+            <div className="right">
+              <i className="tip2 fa fa-angle-up"></i>
               <span>收起筛选</span>
               <a>查询结果</a>
             </div>
           </div>
-          <div class="scr-con">
+          <div className="scr-con">
             <span>品牌名称：</span>
             <input type="text" placeholder="品牌名称" name="" />
             <span>活动状态：</span>
@@ -186,21 +187,7 @@ const rowSelection = {
          <div className="tablebox">
         <div>
           <div className="table-operations" style={{textAlign:'right',paddingBottom:'20px'}}>
-            <Button onClick={this.setAgeSort}>选择厂家</Button>
-            <Select
-              showSearch
-              style={{ width: 100,marginLeft:10}}
-              placeholder="显示条数"
-              optionFilterProp="children"
-              onChange={this.selhandleChange}
-              onFocus={this.selhandleFocus}
-              onBlur={this.selhandleBlur}
-              filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
-            >
-              <Option value="30">30</Option>
-              <Option value="40">40</Option>
-              <Option value="50">50</Option>
-            </Select>
+            <Factory/>
             <Select
               showSearch
               style={{ width: 100,marginLeft:10}}
@@ -237,6 +224,14 @@ const rowSelection = {
                 </div>
                 )}
               loading={false}
+              pagination={{ 
+                  showQuickJumper:true,
+                  showSizeChanger:true,
+                  total:100,
+                  showTotal: function () {  
+                      return '共 ' + 100 + ' 条数据'; 
+                  }
+                 }}
               rowSelection={rowSelection}
               position={'center'} 
               columns={columns} 

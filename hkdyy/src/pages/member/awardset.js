@@ -1,7 +1,7 @@
 import React,{PureComponent} from 'react'
 import { Button, } from 'antd'
 import styles from './index.less'
-import { Card } from '../../components/Card'
+import Header from '../../components/Card'
 import { connect } from 'dva'
 @connect(({index})=>({index}))
 
@@ -9,13 +9,11 @@ export default class Accountset extends PureComponent{
   render(){
     return (
       <div className="content">
-
-        <Card>任务奖励设置</Card>
-
+         <Header>任务奖励设置</Header>
         <div className="tablebox">
           <div className={styles.asetbox}>
             <div className="tip-title">
-              <span>任务奖励设置</span>
+              <span style={{marginLeft:20}}>任务奖励设置</span>
             </div>
             <div className={styles.neptitle}>
               <i className="fa fa-bookmark"></i>

@@ -1,6 +1,7 @@
 import React,{PureComponent} from 'react'
 import { Button, Table , Divider ,Switch , Select} from 'antd'
 import Header from '../../components/Card'
+import Addtimesolt from '../../components/addtimesolt'
 //import styles from './accountset.less'
 
 import { connect } from 'dva'
@@ -24,6 +25,24 @@ const data = [{
 @connect(({index})=>({index}))
 
 export default class Timeslot extends PureComponent{
+  constructor(props) {
+      super(props);
+      this.state = {
+       
+      }
+     this.editonClick=this.editonClick.bind(this);
+    }
+    editonClick(){
+      const { dispatch }=this.props;
+      dispatch({
+        type:"index/save",
+        payload:{
+          addtimevisible:true
+        }
+      });
+    }
+
+
   render(){
 
     const columns = [{
@@ -59,7 +78,7 @@ export default class Timeslot extends PureComponent{
       key:'action',
       render: (text, record) => (
         <span>
-          <a href="javascript:;">编辑</a>
+          <a href="javascript:;" onClick={this.editonClick}>编辑</a>
           <Divider type="vertical" />
           <a href="javascript:;">删除</a>
         </span>
@@ -70,18 +89,20 @@ export default class Timeslot extends PureComponent{
       <div className="content">
         <Header>秒杀时间段列表</Header>
         <div className="tablebox">
-         <div>
-    
-              <Table 
-                  bordered={true}
-                  title={()=>('数据列表')}
-                  loading={false}
-        
-                  position={'center'} 
-                  columns={columns} 
-                  dataSource={data} 
-                  onChange={this.handleChange} />
+          <div>
+            <div className="table-operations" style={{textAlign:'right',paddingBottom:'20px'}}>
+              <Addtimesolt/>
             </div>
+            <Table 
+                  bordered={true}
+                title={()=>('数据列表')}
+                loading={false}
+      
+                position={'center'} 
+                columns={columns} 
+                dataSource={data} 
+                onChange={this.handleChange} />
+          </div>
          
         </div>
       </div>

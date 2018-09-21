@@ -1,3 +1,6 @@
+div.title{
+	box-sizing: content-box;-moz-box-sizing:content-box;-webkit-box-sizing:content-box
+}
 .rulerbox{
 	border: 1px solid #e4e4e4;
 	background: #fff url(../../assets/rub.png) repeat-y left;
@@ -29,24 +32,18 @@
 	margin-bottom: 10px;
 	overflow: hidden;
 }
-.rultab .con li span{
+.rultab .con li span.sp{
 	display: block;
 	float: left;
 	width: 190px;
 	text-align: right;
+	margin-right: 10px;
 }
 .rultab .con li span.ti{
 	width: 80px;
 	margin-left: 10px;
 }
-.rultab .con li input{
-	float: left;
-	width: 158px;
-	height: 38px;
-	border:1px solid #e4e4e4;
-	padding: 0 10px;
-	margin-left: 10px;
-}
+
 .rultab .con li small{
 	float: left;
 	display: block;
@@ -61,10 +58,7 @@
 	float: left;
 	margin-left: 10px;
 }
-.rultab .con li i{
-	margin-top: 6px;
-	margin-left: 10px;
-}
+
 .upbtn{
 	width: 80px;
 	height: 35px;
@@ -95,8 +89,8 @@
 	width: 448px;
 	height: 110px;
 	padding: 10px;
-	margin-left: 10px;
 	float: left;
+	border-radius: 4px;
 }
 .rultab li label{
 	color: #999;
